@@ -19,6 +19,6 @@
 /mongobeat
 /mongobeat.test
 *.pyc
-
+/logs
 # build
 mongobeat
