@@ -41,6 +41,10 @@
         "counter": {
           "type": "long"
         },
+        "databases": {
+          "norms": false,
+          "type": "text"
+        },
         "meta": {
           "properties": {
             "cloud": {

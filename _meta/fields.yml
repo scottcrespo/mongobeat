@@ -7,3 +7,8 @@
       required: true
       description: >
         PLEASE UPDATE DOCUMENTATION
+    - name: databases
+      type: text
+      required: true
+      description: >
+        PLEASE UPDATE DOCUMENTATION

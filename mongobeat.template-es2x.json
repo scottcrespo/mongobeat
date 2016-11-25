@@ -47,6 +47,13 @@
         "counter": {
           "type": "long"
         },
+        "databases": {
+          "index": "analyzed",
+          "norms": {
+            "enabled": false
+          },
+          "type": "string"
+        },
         "meta": {
           "properties": {
             "cloud": {
