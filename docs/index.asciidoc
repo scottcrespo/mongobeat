@@ -1,0 +1,5 @@
+= Mongobeat Docs
+
+Welcome to the Mongobeat documentation.
+
+

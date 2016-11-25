@@ -1,0 +1,24 @@
+# Editor swap files
+*.swp
+*.swo
+*.swn
+
+# Compiled Object files, Static and Dynamic libs (Shared Objects)
+*.o
+*.a
+*.so
+*.exe
+*.test
+*.prof
+*.pyc
+
+/.idea
+/build
+
+.DS_Store
+/mongobeat
+/mongobeat.test
+*.pyc
+
+# build
+mongobeat
