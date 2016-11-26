@@ -2,7 +2,6 @@ package beater
 
 import (
 	"fmt"
-	"strings"
 	"time"
 
 	"github.com/elastic/beats/libbeat/beat"
@@ -52,24 +51,19 @@ func (bt *Mongobeat) Run(b *beat.Beat) error {
 	bt.client = b.Publisher.Connect()
 	ticker := time.NewTicker(bt.config.Period)
 	counter := 1
+
 	for {
+
 		select {
+
 		case <-bt.done:
 			return nil
+
 		case <-ticker.C:
+
 		}
 
-		databases, _ := bt.getDatabases()
-
-		event := common.MapStr{
-			"@timestamp": common.Time(time.Now()),
-			"type":       b.Name,
-			"counter":    counter,
-			"databases":  strings.Join(databases, " "),
-		}
-		bt.client.PublishEvent(event)
-		logp.Info("Event sent")
-		logp.Info("%v", strings.Join(databases, " "))
+		bt.publishDbStats(b)
 		counter++
 	}
 }
@@ -78,14 +72,4 @@ func (bt *Mongobeat) Run(b *beat.Beat) error {
 func (bt *Mongobeat) Stop() {
 	bt.client.Close()
 	close(bt.done)
-}
-
-// getDatabases retrieves current list of databases in the Mongo instance
-func (bt *Mongobeat) getDatabases() ([]string, error) {
-	dbs, err := bt.mongoConn.DatabaseNames()
-	if err != nil {
-		logp.Err("Error retrieving mongo database names from Mongo instance")
-		return []string{}, err
-	}
-	return dbs, nil
 }
