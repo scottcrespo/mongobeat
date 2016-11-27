@@ -2,7 +2,6 @@ package beater
 
 import (
 	"fmt"
-	"log"
 	"time"
 
 	"github.com/elastic/beats/libbeat/beat"
@@ -76,8 +75,6 @@ func (bt *Mongobeat) Run(b *beat.Beat) error {
 		}
 
 		event.Update(event)
-
-		log.Fatal(event)
 		bt.client.PublishEvent(event)
 		logp.Info("Event sent")
 		counter++
