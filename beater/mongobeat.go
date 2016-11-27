@@ -2,6 +2,7 @@ package beater
 
 import (
 	"fmt"
+	"log"
 	"time"
 
 	"github.com/elastic/beats/libbeat/beat"
@@ -63,7 +64,22 @@ func (bt *Mongobeat) Run(b *beat.Beat) error {
 
 		}
 
-		bt.publishDbStats(b)
+		dbStats, err := bt.getDbStats(b)
+		if err != nil {
+			logp.Err("Error retrieving dbStats")
+		}
+
+		event := common.MapStr{
+			"@timestamp": common.Time(time.Now()),
+			"type":       b.Name,
+			"dbStats":    dbStats,
+		}
+
+		event.Update(event)
+
+		log.Fatal(event)
+		bt.client.PublishEvent(event)
+		logp.Info("Event sent")
 		counter++
 	}
 }

@@ -1,10 +1,6 @@
 package beater
 
 import (
-	"fmt"
-	"log"
-	"time"
-
 	"github.com/elastic/beats/libbeat/beat"
 	"github.com/elastic/beats/libbeat/common"
 	"github.com/elastic/beats/libbeat/logp"
@@ -27,16 +23,18 @@ type DbStats struct {
 	Ok          int    `bson:"ok"            json:"ok"`
 }
 
-// publishDbStats calls db.stats() command for each database in the mongo instance and
-// publishes the results
-func (bt *Mongobeat) publishDbStats(b *beat.Beat) {
+// getDbStats calls db.stats() command and appends to a common.MapStr, with root key as
+// "dbStats"
+func (bt *Mongobeat) getDbStats(b *beat.Beat) (*common.MapStr, error) {
 
 	dbs, err := bt.getDatabases()
 	if err != nil {
-		return
+		return &common.MapStr{}, err
 	}
 
-	for _, dbName := range dbs {
+	resultsList := make([]map[string]interface{}, len(dbs))
+
+	for i, dbName := range dbs {
 		db := bt.mongoConn.DB(dbName)
 
 		results := DbStats{}
@@ -44,22 +42,16 @@ func (bt *Mongobeat) publishDbStats(b *beat.Beat) {
 		err := db.Run("dbStats", &results)
 		if err != nil {
 			logp.Err("Failed to retrieve stats for db %s", dbName)
-			continue
+			return &common.MapStr{}, err
 		}
-
 		resultsMap := structs.Map(results)
-
-		event := common.MapStr{
-			"@timestamp": common.Time(time.Now()),
-			"type":       fmt.Sprintf("%s.dbStats", b.Name),
-		}
-
-		event.Update(resultsMap)
-
-		log.Fatal(event)
-		bt.client.PublishEvent(event)
-		logp.Info("Event sent")
+		resultsList[i] = resultsMap
 	}
+
+	mapStr := common.MapStr{
+		"dbStats": resultsList,
+	}
+	return &mapStr, nil
 }
 
 // getDatabases retrieves current list of databases in the Mongo instance
