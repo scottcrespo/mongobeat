@@ -71,10 +71,9 @@ func (bt *Mongobeat) Run(b *beat.Beat) error {
 		event := common.MapStr{
 			"@timestamp": common.Time(time.Now()),
 			"type":       b.Name,
-			"dbStats":    dbStats,
 		}
 
-		event.Update(event)
+		event.Update(*dbStats)
 		bt.client.PublishEvent(event)
 		logp.Info("Event sent")
 		counter++
