@@ -9,7 +9,7 @@ This project is currently in an early development phase, and is not intended for
 
 | Field | Mongo CLI Command |
 | -- | -- |
-| `dbStats` | db.stats() |
+| `dbStats` | `db.stats()` |
 
 ### dbStats
 
