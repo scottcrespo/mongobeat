@@ -1,6 +1,58 @@
 # Mongobeat
 
-Welcome to Mongobeat.
+Mongobeat is a lightweight agent that formats and ships infomation about a MongoDB instance.
+
+This project is currently in an early development phase, and is not intended for production use!
+
+
+## Data Shipped By Mongobeat
+
+| Field | Mongo CLI Command |
+| -- | -- |
+| `dbStats` | db.stats() |
+
+### dbStats
+
+Mongobeat iterates through the list of running databases on the instance and calls db.stats().
+
+The results are appended to the field `dbStats` as part of the Mongobeat event.
+
+Sample `dbStats` field:
+
+```
+...
+
+"dbStats": [
+{
+  "AvgObjSize": 0,
+  "Collections": 4,
+  "DataSize": 1168,
+  "Db": "admin",
+  "FileSize": 67108864,
+  "IndexSize": 24528,
+  "Indexes": 3,
+  "NumExtents": 4,
+  "Objects": 11,
+  "Ok": 1,
+  "StorageSize": 28672
+},
+{
+  "AvgObjSize": 0,
+  "Collections": 3,
+  "DataSize": 36560,
+  "Db": "local",
+  "FileSize": 67108864,
+  "IndexSize": 8176,
+  "Indexes": 1,
+  "NumExtents": 3,
+  "Objects": 34,
+  "Ok": 1,
+  "StorageSize": 10498048
+}
+],
+
+...
+```
 
 Ensure that this folder is at the following location:
 `${GOPATH}/github.com/scottcrespo`
