@@ -1,6 +1,7 @@
 package beater
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/elastic/beats/libbeat/beat"
@@ -35,8 +36,9 @@ func (bt *Mongobeat) getDbStats(b *beat.Beat) {
 		return
 	}
 
-	// store event time here so all dbStats events have exactly the same time stamp
+	// store common event info here
 	eventTime := common.Time(time.Now())
+	eventType := fmt.Sprintf("%s.DbStats", b.Name)
 
 	for _, dbName := range dbs {
 		db := bt.mongoConn.DB(dbName)
@@ -54,7 +56,7 @@ func (bt *Mongobeat) getDbStats(b *beat.Beat) {
 		// instantiate event
 		event := common.MapStr{
 			"@timestamp": eventTime,
-			"type":       b.Name,
+			"type":       eventType,
 		}
 		// update event with db results
 		event.Update(resultsMap)
