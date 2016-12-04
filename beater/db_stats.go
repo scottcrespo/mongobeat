@@ -7,23 +7,21 @@ import (
 	"github.com/elastic/beats/libbeat/beat"
 	"github.com/elastic/beats/libbeat/common"
 	"github.com/elastic/beats/libbeat/logp"
-
-	"github.com/fatih/structs"
 )
 
 // DbStats represents the fields returned from a call to db.stats() in Mongo
 type DbStats struct {
 	Db          string `bson:"db"            json:"db"`
-	Collections int    `bson:"collections"   json:"collections"`
-	Objects     int64  `bson:"objects"       json:"objects"`
-	AvgObjSize  int64  `bson:"avgObjectSize" json:"avgObjSize"`
-	DataSize    int64  `bson:"dataSize"      json:"dataSize"`
-	StorageSize int64  `bson:"storageSize"   json:"storageSize"`
-	NumExtents  int64  `bson:"numExtents"    json:"numExtents"`
-	Indexes     int    `bson:"indexes"       json:"indexes"`
-	IndexSize   int64  `bson:"indexSize"     json:"indexSize"`
-	FileSize    int64  `bson:"fileSize"      json:"fileSize"`
-	Ok          int    `bson:"ok"            json:"ok"`
+	Collections uint   `bson:"collections"   json:"collections"`
+	Objects     uint64 `bson:"objects"       json:"objects"`
+	AvgObjSize  uint64 `bson:"avgObjectSize" json:"avg_obj_size"`
+	DataSize    uint64 `bson:"dataSize"      json:"data_size"`
+	StorageSize uint64 `bson:"storageSize"   json:"storage_size"`
+	NumExtents  uint64 `bson:"numExtents"    json:"num_extents"`
+	Indexes     uint64 `bson:"indexes"       json:"indexes"`
+	IndexSize   uint64 `bson:"indexSize"     json:"index_size"`
+	FileSize    uint64 `bson:"fileSize"      json:"file_size"`
+	Ok          uint   `bson:"ok"            json:"ok"`
 }
 
 // getDbStats calls db.stats() command and appends to a common.MapStr, with root key as
@@ -38,7 +36,7 @@ func (bt *Mongobeat) getDbStats(b *beat.Beat) {
 
 	// store common event info here
 	eventTime := common.Time(time.Now())
-	eventType := fmt.Sprintf("%s.DbStats", b.Name)
+	eventType := fmt.Sprintf("%s.db_stats", b.Name)
 
 	for _, dbName := range dbs {
 		db := bt.mongoConn.DB(dbName)
@@ -51,15 +49,13 @@ func (bt *Mongobeat) getDbStats(b *beat.Beat) {
 			continue
 		}
 
-		// convert results to map[string]interface{}
-		resultsMap := structs.Map(results)
 		// instantiate event
 		event := common.MapStr{
 			"@timestamp": eventTime,
 			"type":       eventType,
+			"db_stats":   results,
 		}
-		// update event with db results
-		event.Update(resultsMap)
+
 		// fire
 		bt.client.PublishEvent(event)
 		logp.Info("dbStats Event sent")

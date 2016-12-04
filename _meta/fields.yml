@@ -1,14 +1,52 @@
-- key: mongobeat
-  title: mongobeat
+- key: mongobeat.db_stats
+  title: mongobeat.db_stats
   description:
   fields:
-    - name: counter
-      type: long
+    - name: "@timestamp"
+      type: date
       required: true
+      format: YYYY-MM-DDTHH:MM:SS.milliZ
+      example: 2015-01-24T14:06:05.071Z
       description: >
-        PLEASE UPDATE DOCUMENTATION
-    - name: databases
-      type: text
+        The timestamp of when the measurements were taken. The precision is in milliseconds.
+        The timezone is UTC.
+
+    - name: type
+      type: string
       required: true
-      description: >
-        PLEASE UPDATE DOCUMENTATION
+
+    - name: db_stats
+      type: group
+  
+      - name: avg_obj_size
+        type: long
+
+      - name: collections
+        type: int
+
+      - name: data_size
+        type: long
+
+      - name: db
+        type: string
+
+      - name: file_size
+        type: long
+
+      - name: index_size
+        type: long
+
+      - name: indexes
+        type: long
+
+      - name: num_extents
+        type: long
+
+      - name: objects
+        type: long
+
+      - name: ok
+        type: int
+
+      - name: storage_size
+        type: string
