@@ -1,6 +1,8 @@
 package beater
 
 import (
+	"time"
+
 	"github.com/elastic/beats/libbeat/beat"
 	"github.com/elastic/beats/libbeat/common"
 	"github.com/elastic/beats/libbeat/logp"
@@ -11,13 +13,13 @@ import (
 // DbStats represents the fields returned from a call to db.stats() in Mongo
 type DbStats struct {
 	Db          string `bson:"db"            json:"db"`
-	Collections int64  `bson:"collections"   json:"collections"`
+	Collections int    `bson:"collections"   json:"collections"`
 	Objects     int64  `bson:"objects"       json:"objects"`
 	AvgObjSize  int64  `bson:"avgObjectSize" json:"avgObjSize"`
 	DataSize    int64  `bson:"dataSize"      json:"dataSize"`
 	StorageSize int64  `bson:"storageSize"   json:"storageSize"`
 	NumExtents  int64  `bson:"numExtents"    json:"numExtents"`
-	Indexes     int64  `bson:"indexes"       json:"indexes"`
+	Indexes     int    `bson:"indexes"       json:"indexes"`
 	IndexSize   int64  `bson:"indexSize"     json:"indexSize"`
 	FileSize    int64  `bson:"fileSize"      json:"fileSize"`
 	Ok          int    `bson:"ok"            json:"ok"`
@@ -25,16 +27,18 @@ type DbStats struct {
 
 // getDbStats calls db.stats() command and appends to a common.MapStr, with root key as
 // "dbStats"
-func (bt *Mongobeat) getDbStats(b *beat.Beat) (*common.MapStr, error) {
+func (bt *Mongobeat) getDbStats(b *beat.Beat) {
 
 	dbs, err := bt.getDatabases()
 	if err != nil {
-		return &common.MapStr{}, err
+		logp.Err("DbStats: Failed to retrieve list of databases from mongo instance")
+		return
 	}
 
-	resultsList := make([]map[string]interface{}, len(dbs))
+	// store event time here so all dbStats events have exactly the same time stamp
+	eventTime := common.Time(time.Now())
 
-	for i, dbName := range dbs {
+	for _, dbName := range dbs {
 		db := bt.mongoConn.DB(dbName)
 
 		results := DbStats{}
@@ -42,16 +46,22 @@ func (bt *Mongobeat) getDbStats(b *beat.Beat) (*common.MapStr, error) {
 		err := db.Run("dbStats", &results)
 		if err != nil {
 			logp.Err("Failed to retrieve stats for db %s", dbName)
-			return &common.MapStr{}, err
+			continue
 		}
-		resultsMap := structs.Map(results)
-		resultsList[i] = resultsMap
-	}
 
-	mapStr := common.MapStr{
-		"dbStats": resultsList,
+		// convert results to map[string]interface{}
+		resultsMap := structs.Map(results)
+		// instantiate event
+		event := common.MapStr{
+			"@timestamp": eventTime,
+			"type":       b.Name,
+		}
+		// update event with db results
+		event.Update(resultsMap)
+		// fire
+		bt.client.PublishEvent(event)
+		logp.Info("dbStats Event sent")
 	}
-	return &mapStr, nil
 }
 
 // getDatabases retrieves current list of databases in the Mongo instance

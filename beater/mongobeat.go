@@ -63,19 +63,7 @@ func (bt *Mongobeat) Run(b *beat.Beat) error {
 
 		}
 
-		dbStats, err := bt.getDbStats(b)
-		if err != nil {
-			logp.Err("Error retrieving dbStats")
-		}
-
-		event := common.MapStr{
-			"@timestamp": common.Time(time.Now()),
-			"type":       b.Name,
-		}
-
-		event.Update(*dbStats)
-		bt.client.PublishEvent(event)
-		logp.Info("Event sent")
+		bt.getDbStats(b)
 		counter++
 	}
 }
