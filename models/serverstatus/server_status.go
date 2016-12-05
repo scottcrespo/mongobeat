@@ -28,4 +28,5 @@ type ServerStatus struct {
 	WriteBacksBacksQueued bool `bson:"writeBacksQueued" json:"write_backs_queued"`
 	Mem                   `bson:"mem" json:"mem"`
 	Metrics               `bson:"metrics" json:"metrics"`
+	WiredTiger            `bson:"wiredTiger" json:"wired_tiger"`
 }
