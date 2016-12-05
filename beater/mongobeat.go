@@ -64,6 +64,7 @@ func (bt *Mongobeat) Run(b *beat.Beat) error {
 		}
 
 		bt.getDbStats(b)
+		bt.getServerStatus(b)
 		counter++
 	}
 }
