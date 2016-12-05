@@ -8,6 +8,8 @@ import (
 	"github.com/elastic/beats/libbeat/beat"
 	"github.com/elastic/beats/libbeat/common"
 	"github.com/elastic/beats/libbeat/logp"
+
+	status "github.com/scottcrespo/mongobeat/models/serverstatus"
 )
 
 // getDbStats calls db.stats() command and appends to a common.MapStr, with root key as
@@ -19,7 +21,7 @@ func (bt *Mongobeat) getServerStatus(b *beat.Beat) {
 
 	db := bt.mongoConn.DB("admin")
 
-	results := ServerStatus{}
+	results := status.ServerStatus{}
 
 	err := db.Run("serverStatus", &results)
 	if err != nil {
