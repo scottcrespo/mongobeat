@@ -8,8 +8,9 @@ This project is currently in an early development phase, and is not intended for
 ## Data Shipped By Mongobeat
 
 | Field | Mongo CLI Command |
-| -- | -- |
-| `dbStats` | `db.stats()` |
+| --- | --- |
+| `db_stats` | `db.stats()` |
+| `server_status` | `db.serverStatus()` |
 
 ### dbStats
 
