@@ -23,5 +23,5 @@ type LockMode struct {
 	R  uint64 `bson:"r" json:"intent_shared_lock"`
 	RR uint64 `bson:"R" json:"shared_lock"`
 	W  uint64 `bson:"w" json:"intent_exclusive_lock"`
-	WW uint64 `bson:"W json:exclusive_lock"`
+	WW uint64 `bson:"W" json:"exclusive_lock"`
 }

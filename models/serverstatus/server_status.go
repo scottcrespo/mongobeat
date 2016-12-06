@@ -24,6 +24,7 @@ type ServerStatus struct {
 	Network               `bson:"network" json:"network"`
 	OpsCounters           `bson:"opscounters" json:"ops_counters"`
 	OpsCountersRepl       `bson:"opscountersRepl" json:"ops_counters_repl"`
+	Repl                  `bson:"repl" json:"repl"`
 	StorageEngine         `bson:"storageEngine" json:"storage_engine"`
 	WriteBacksBacksQueued bool `bson:"writeBacksQueued" json:"write_backs_queued"`
 	Mem                   `bson:"mem" json:"mem"`

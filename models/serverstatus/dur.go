@@ -5,7 +5,7 @@ type Dur struct {
 	Commmits           uint `bson:"commits"             json:"commits"`
 	JournaledMB        uint `bson:"journaledMB"         json:"journaled_mb"`
 	WriteToDataFilesMB uint `bson:"writeToDataFilesMB"  json:"write_to_data_files_mb"`
-	Compression        uint `bson:"compression"         json:"compression:"`
+	Compression        uint `bson:"compression"         json:"compression"`
 	CommitsInWriteLock uint `bson:"commitsInWriteLock"  json:"commits_in_write_lock"`
 	EarlyCommits       uint `bson:"earlyCommits"        json:"early_commits"`
 

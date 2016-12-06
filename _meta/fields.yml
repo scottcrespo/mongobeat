@@ -1,52 +1,1119 @@
-- key: mongobeat.db_stats
-  title: mongobeat.db_stats
+- key: defaults
+  title: defaults
+  description: defaults
+  fields:
+    - name: type
+      type: keyword
+      required: true
+
+- key: db_stats
+  title: db_stats
   description:
   fields:
-    - name: "@timestamp"
-      type: date
-      required: true
-      format: YYYY-MM-DDTHH:MM:SS.milliZ
-      example: 2015-01-24T14:06:05.071Z
-      description: >
-        The timestamp of when the measurements were taken. The precision is in milliseconds.
-        The timezone is UTC.
 
-    - name: type
-      type: string
-      required: true
+      - name: db_stats
+        type: group
+        fields:
 
-    - name: db_stats
+          - name: avg_obj_size
+            type: long
+
+          - name: collections
+            type: integer
+
+          - name: data_size
+            type: long
+
+          - name: db
+            type: keyword
+
+          - name: file_size
+            type: long
+
+          - name: index_size
+            type: long
+
+          - name: indexes
+            type: long
+
+          - name: num_extents
+            type: long
+
+          - name: objects
+            type: long
+
+          - name: ok
+            type: integer
+
+          - name: storage_size
+            type: long
+
+- key: mongobeat.server_status
+  title: mongobeat.server_status
+  description:
+  fields:
+
+    - name: server_status
       type: group
-  
-      - name: avg_obj_size
-        type: long
+      fields:
 
-      - name: collections
-        type: int
+        - name: ok
+          type: integer
 
-      - name: data_size
-        type: long
+        - name: host
+          type: keyword
 
-      - name: db
-        type: string
+        - name: advisor_host_fqdns
+          type: keyword
 
-      - name: file_size
-        type: long
+        - name: version
+          type: keyword
 
-      - name: index_size
-        type: long
+        - name: process
+          type: keyword
 
-      - name: indexes
-        type: long
+        - name: pid
+          type: long
 
-      - name: num_extents
-        type: long
+        - name: uptime
+          type: integer
 
-      - name: objects
-        type: long
+        - name: uptime_ms
+          type: long
 
-      - name: ok
-        type: int
+        - name: uptime_estimate
+          type: integer
 
-      - name: storage_size
-        type: string
+        - name: local_time
+          type: date
+          required: true
+          format: YYYY-MM-DDTHH:MM:SS.milliZ
+          example: 2015-01-24T14:06:05.071Z
+
+        - name: asserts
+          type: group
+          fields:
+            - name: regular
+              type: integer
+
+            - name: warning
+              type: integer
+
+            - name: msg
+              type: integer
+
+            - name: user
+              type: integer
+
+            - name: rollovers
+              type: integer
+
+        - name: background_flushing
+          type: group
+          fields:
+            - name: flushes
+              type: integer
+
+            - name: total_ms
+              type: integer
+
+            - name: avg_ms
+              type: integer
+
+            - name: last_finished
+              type: date
+              format: YYYY-MM-DDTHH:MM:SS.milliZ
+
+        - name: connections
+          type: group
+          fields:
+            - name: current
+              type: integer
+
+            - name: available
+              type: integer
+
+            - name: total_created
+              type: long
+
+        - name: dur
+          type: group
+          fields:
+            - name: commits
+              type: integer
+
+            - name: journaled_mb
+              type: integer
+
+            - name: write_to_data_files_mv
+              type: integer
+
+            - name: compression
+              type: integer
+
+            - name: commits_in_write_lock
+              type: integer
+
+            - name: early_commits
+              type: integer
+
+            - name: time_ms
+              type: group
+              fields:
+                - name: dt
+                  type: integer
+
+                - name: prep_log_buffer
+                  type: integer
+
+                - name: write_to_journal
+                  type: integer
+
+                - name: remap_private_view
+                  type: integer
+
+                - name: commits
+                  type: integer
+
+                - name: commits_in_write_lock
+                  type: integer
+
+        - name: extra_info
+          type: group
+          fields:
+            - name: note
+              type: text
+
+            - name: page_faults
+              type: integer
+
+            - name: heap_usage_bytes
+              type: long
+
+
+        - name: global_lock
+          type: group
+          fields:
+            - name: total_time
+              type: long
+
+            - name: current_queue
+              type: group
+              fields:
+                - name: total
+                  type: integer
+                - name: readers
+                  type: integer
+                - name: writers
+                  type: integer
+
+            - name: active_clients
+              type: group
+              fields:
+                - name: total
+                  type: integer
+                - name: readers
+                  type: integer
+                - name: writers
+                  type: integer
+
+        - name: locks
+          type: group
+          fields:
+            - name: global
+              type: group
+              fields:
+                - name: acquire_count
+                  type: group
+                  fields:
+                    - name: intent_shared_lock
+                      type: long
+                    - name: shared_lock
+                      type: long
+                    - name: intent_exclusive_lock
+                      type: long
+                    - name: exclusive_lock
+                      type: long
+
+                - name: acquire_wait_count
+                  type: group
+                  fields:
+                    - name: intent_shared_lock
+                      type: long
+                    - name: shared_lock
+                      type: long
+                    - name: intent_exclusive_lock
+                      type: long
+                    - name: exclusive_lock
+                      type: long
+
+                - name: time_acquiring_micros
+                  type: group
+                  fields:
+                    - name: intent_shared_lock
+                      type: long
+                    - name: shared_lock
+                      type: long
+                    - name: intent_exclusive_lock
+                      type: long
+                    - name: exclusive_lock
+                      type: long
+
+                - name: dead_lock_count
+                  type: group
+                  fields:
+                    - name: intent_shared_lock
+                      type: long
+                    - name: shared_lock
+                      type: long
+                    - name: intent_exclusive_lock
+                      type: long
+                    - name: exclusive_lock
+                      type: long
+
+            - name: mmap_v1_journal
+              type: group
+              fields:
+                - name: acquire_count
+                  type: group
+                  fields:
+                    - name: intent_shared_lock
+                      type: long
+                    - name: shared_lock
+                      type: long
+                    - name: intent_exclusive_lock
+                      type: long
+                    - name: exclusive_lock
+                      type: long
+
+                - name: acquire_wait_count
+                  type: group
+                  fields:
+                    - name: intent_shared_lock
+                      type: long
+                    - name: shared_lock
+                      type: long
+                    - name: intent_exclusive_lock
+                      type: long
+                    - name: exclusive_lock
+                      type: long
+
+                - name: time_acquiring_micros
+                  type: group
+                  fields:
+                    - name: intent_shared_lock
+                      type: long
+                    - name: shared_lock
+                      type: long
+                    - name: intent_exclusive_lock
+                      type: long
+                    - name: exclusive_lock
+                      type: long
+
+                - name: dead_lock_count
+                  type: group
+                  fields:
+                    - name: intent_shared_lock
+                      type: long
+                    - name: shared_lock
+                      type: long
+                    - name: intent_exclusive_lock
+                      type: long
+                    - name: exclusive_lock
+                      type: long
+
+            - name: database
+              type: group
+              fields:
+                - name: acquire_count
+                  type: group
+                  fields:
+                    - name: intent_shared_lock
+                      type: long
+                    - name: shared_lock
+                      type: long
+                    - name: intent_exclusive_lock
+                      type: long
+                    - name: exclusive_lock
+                      type: long
+
+                - name: acquire_wait_count
+                  type: group
+                  fields:
+                    - name: intent_shared_lock
+                      type: long
+                    - name: shared_lock
+                      type: long
+                    - name: intent_exclusive_lock
+                      type: long
+                    - name: exclusive_lock
+                      type: long
+
+                - name: time_acquiring_micros
+                  type: group
+                  fields:
+                    - name: intent_shared_lock
+                      type: long
+                    - name: shared_lock
+                      type: long
+                    - name: intent_exclusive_lock
+                      type: long
+                    - name: exclusive_lock
+                      type: long
+
+                - name: dead_lock_count
+                  type: group
+                  fields:
+                    - name: intent_shared_lock
+                      type: long
+                    - name: shared_lock
+                      type: long
+                    - name: intent_exclusive_lock
+                      type: long
+                    - name: exclusive_lock
+                      type: long
+
+            - name: collection
+              type: group
+              fields:
+                - name: acquire_count
+                  type: group
+                  fields:
+                    - name: intent_shared_lock
+                      type: long
+                    - name: shared_lock
+                      type: long
+                    - name: intent_exclusive_lock
+                      type: long
+                    - name: exclusive_lock
+                      type: long
+
+                - name: acquire_wait_count
+                  type: group
+                  fields:
+                    - name: intent_shared_lock
+                      type: long
+                    - name: shared_lock
+                      type: long
+                    - name: intent_exclusive_lock
+                      type: long
+                    - name: exclusive_lock
+                      type: long
+
+                - name: time_acquiring_micros
+                  type: group
+                  fields:
+                    - name: intent_shared_lock
+                      type: long
+                    - name: shared_lock
+                      type: long
+                    - name: intent_exclusive_lock
+                      type: long
+                    - name: exclusive_lock
+                      type: long
+
+                - name: dead_lock_count
+                  type: group
+                  fields:
+                    - name: intent_shared_lock
+                      type: long
+                    - name: shared_lock
+                      type: long
+                    - name: intent_exclusive_lock
+                      type: long
+                    - name: exclusive_lock
+                      type: long
+
+            - name: metadata
+              type: group
+              fields:
+                - name: acquire_count
+                  type: group
+                  fields:
+                    - name: intent_shared_lock
+                      type: long
+                    - name: shared_lock
+                      type: long
+                    - name: intent_exclusive_lock
+                      type: long
+                    - name: exclusive_lock
+                      type: long
+
+                - name: acquire_wait_count
+                  type: group
+                  fields:
+                    - name: intent_shared_lock
+                      type: long
+                    - name: shared_lock
+                      type: long
+                    - name: intent_exclusive_lock
+                      type: long
+                    - name: exclusive_lock
+                      type: long
+
+                - name: time_acquiring_micros
+                  type: group
+                  fields:
+                    - name: intent_shared_lock
+                      type: long
+                    - name: shared_lock
+                      type: long
+                    - name: intent_exclusive_lock
+                      type: long
+                    - name: exclusive_lock
+                      type: long
+
+                - name: dead_lock_count
+                  type: group
+                  fields:
+                    - name: intent_shared_lock
+                      type: long
+                    - name: shared_lock
+                      type: long
+                    - name: intent_exclusive_lock
+                      type: long
+                    - name: exclusive_lock
+                      type: long
+
+            - name: oplog
+              type: group
+              fields:
+                - name: acquire_count
+                  type: group
+                  fields:
+                    - name: intent_shared_lock
+                      type: long
+                    - name: shared_lock
+                      type: long
+                    - name: intent_exclusive_lock
+                      type: long
+                    - name: exclusive_lock
+                      type: long
+
+                - name: acquire_wait_count
+                  type: group
+                  fields:
+                    - name: intent_shared_lock
+                      type: long
+                    - name: shared_lock
+                      type: long
+                    - name: intent_exclusive_lock
+                      type: long
+                    - name: exclusive_lock
+                      type: long
+
+                - name: time_acquiring_micros
+                  type: group
+                  fields:
+                    - name: intent_shared_lock
+                      type: long
+                    - name: shared_lock
+                      type: long
+                    - name: intent_exclusive_lock
+                      type: long
+                    - name: exclusive_lock
+                      type: long
+
+                - name: dead_lock_count
+                  type: group
+                  fields:
+                    - name: intent_shared_lock
+                      type: long
+                    - name: shared_lock
+                      type: long
+                    - name: intent_exclusive_lock
+                      type: long
+                    - name: exclusive_lock
+                      type: long
+        - name: network
+          type: group
+          fields:
+            - name: bytes_in
+              type: long
+            - name: bytes_out
+              type: long
+            - name: num_requests
+              type: long
+
+        - name: ops_counters
+          type: group
+          fields:
+            - name: insert
+              type: integer
+
+            - name: query
+              type: integer
+
+            - name: update
+              type: integer
+
+            - name: delete
+              type: integer
+
+            - name: get_more
+              type: integer
+
+            - name: command
+              type: integer
+
+        - name: ops_counters_repl
+          type: group
+          fields:
+            - name: insert
+              type: integer
+
+            - name: query
+              type: integer
+
+            - name: update
+              type: integer
+
+            - name: delete
+              type: integer
+
+            - name: get_more
+              type: integer
+
+            - name: command
+              type: integer
+
+        - name: repl
+          type: group
+          fields:
+            - name: set_name
+              type: keyword
+
+            - name: set_version
+              type: keyword
+
+            - name: is_master
+              type: boolean
+
+            - name: secondary
+              type: boolean
+
+            - name: hosts
+              type: keyword
+
+            - name: primary
+              type: keyword
+
+            - name: me
+              type: keyword
+
+            - name: election_id
+              type: keyword
+
+            - name: rbid
+              type: integer
+
+            - name: slaves
+              type: nested
+              fields:
+                - name: rid
+                  type: keyword
+
+                - name: op_time
+                  type: date
+                  format: YYYY-MM-DDTHH:MM:SS.milliZ
+
+                - name: host
+                  type: keyword
+
+                - name: member_id
+                  type: integer
+
+        - name: storage_engine
+          type: group
+          fields:
+            - name: name
+              type: keyword
+
+            - name: supports_committed_reads
+              type: boolean
+
+            - name: persistent
+              type: boolean
+
+        - name: wired_tiger
+          type: group
+          fields:
+            - name: uri
+              type: keyword
+            - name: lsm
+              type: group
+              fields:
+
+                - name: sleep_for_lsm_checkpoint_throttle
+                  type: integer
+
+                - name: sleep_for_lsm_merge_throttle
+                  type: integer
+
+                - name: rows_merged_in_an_lsm_tree
+                  type: integer
+
+                - name: application_work_units_currently_queued
+                  type: integer
+
+                - name: merge_work_units_currently_queued
+                  type: integer
+
+                - name: tree_queue_hit_maximum
+                  type: integer
+
+                - name: switch_work_units_currently_queued
+                  type: integer
+
+                - name: tree_maintenance_operations_scheduled
+                  type: integer
+
+                - name: tree_maintenance_operations_discarded
+                  type: integer
+
+                - name: tree_maintenance_operations_executed
+                  type: integer
+
+            - name: async
+              type: group
+              fields:
+                - name: number_of_allocation_state_races
+                  type: integer
+
+                - name: number_of_operation_slots_viewed_for_allocation
+                  type: integer
+
+                - name: current_work_queue_length
+                  type: integer
+
+                - name: number_of_flush_calls
+                  type: integer
+
+                - name: number_of_times_operation_allocation_failed
+                  type: integer
+
+                - name: maximum_work_queue_length
+                  type: integer
+
+                - name: number_of_times_worker_found_no_work
+                  type: integer
+
+                - name: total_allocations
+                  type: integer
+
+                - name: total_compact_calls
+                  type: integer
+
+                - name: total_insert_calls
+                  type: integer
+
+                - name: total_remove_calls
+                  type: integer
+
+                - name: total_search_calls
+                  type: integer
+
+                - name: total_update_calls
+                  type: integer
+
+            - name: block_manager
+              type: group
+              fields:
+
+                - name: mapped_bytes_read
+                  type: integer
+
+                - name: bytes_read
+                  type: integer
+
+                - name: bytes_written
+                  type: integer
+
+                - name: mapped_blocked_read
+                  type: integer
+
+                - name: blocks_pre_loaded
+                  type: integer
+
+                - name: blocks_read
+                  type: integer
+
+                - name: blocks_written
+                  type: integer
+
+            - name: cache
+              type: group
+              fields:
+
+                - name: tracked_dirty_bytes_in_the_cache
+                  type: integer
+
+                - name: bytes_currently_in_the_cache
+                  type: integer
+
+                - name: maximum_bytes_configured
+                  type: integer
+
+                - name: bytes_read_into_cache
+                  type: integer
+
+                - name: bytes_written_from_cache
+                  type: integer
+
+                - name: pages_evicted_by_application_threads
+                  type: integer
+
+                - name: checkpoint_blocked_page_eviction
+                  type: integer
+
+                - name: unmodified_pages_evicted
+                  type: integer
+
+                - name: page_split_during_eviction_deepened_the_tree
+                  type: integer
+
+                - name: modified_pages_evicted
+                  type: integer
+
+                - name: pages_selected_for_eviction_unable_to_be_evicted
+                  type: integer
+
+                - name: pages_evicted_because_they_exceeded_the_in_memory_maximum
+                  type: integer
+
+                - name: pages_evicted_because_they_had_chains_of_deleted_items
+                  type: integer
+
+                - name: failed_eviction_of_pages_that_exceeded_the_in_memory_maximum
+                  type: integer
+
+                - name: hazard_pointer_blocked_page_eviction
+                  type: integer
+
+                - name: internal_pages_evicted
+                  type: integer
+
+                - name: max_page_size_at_eviction
+                  type: integer
+
+                - name: eviction_server_candidate_queue_empty_when_topping_up
+                  type: integer
+
+                - name: eviction_server_candidate_queue_not_empty_when_topping_up
+                  type: integer
+
+                - name: eviction_server_evicting_pages
+                  type: integer
+
+                - name: eviction_server_populating_queue_but_not_evicting_pages
+                  type: integer
+
+                - name: eviction_server_unable_to_reach_eviction_goal
+                  type: integer
+
+                - name: pages_split_during_eviction
+                  type: integer
+
+                - name: pages_walked_for_eviction
+                  type: integer
+
+                - name: eviction_worker_thread_evicting_pages
+                  type: integer
+
+                - name: in_memory_page_splits
+                  type: integer
+
+                - name: percentage_overhead
+                  type: integer
+
+                - name: tracked_dirty_pages_in_the_cache
+                  type: integer
+
+                - name: pages_currently_held_in_the_cache
+                  type: integer
+
+                - name: pages_read_into_cache
+                  type: integer
+
+                - name: pages_written_from_cache
+                  type: integer
+
+            - name: connection
+              type: group
+              fields:
+                - name: pthread_mutex_condition_wait_calls
+                  type: integer
+
+                - name: files_currently_open
+                  type: integer
+
+                - name: memory_allocations
+                  type: integer
+
+                - name: memory_frees
+                  type: integer
+
+                - name: memory_re_allocations
+                  type: integer
+
+                - name: total_read_IOs
+                  type: integer
+
+                - name: pthread_mutex_shared_lock_read_lock_calls
+                  type: integer
+
+                - name: pthread_mutex_shared_lock_write_lock_calls
+                  type: integer
+
+                - name: total_write_IOs
+                  type: integer
+
+            - name: cursor
+              type: group
+              fields:
+                - name: cursor_create_calls
+                  type: integer
+
+                - name: cursor_insert_calls
+                  type: integer
+
+                - name: cursor_next_calls
+                  type: integer
+
+                - name: cursor_prev_calls
+                  type: integer
+
+                - name: cursor_remove_calls
+                  type: integer
+
+                - name: cursor_reset_calls
+                  type: integer
+
+                - name: cursor_search_calls
+                  type: integer
+
+                - name: cursor_search_near_calls
+                  type: integer
+
+                - name: cursor_update_calls
+                  type: integer
+
+            - name: data_handle
+              type: group
+              fields:
+                - name: connection_d_handles_swept
+                  type: integer
+
+                - name: connection_candidate_referenced
+                  type: integer
+
+                - name: connection_sweeps
+                  type: integer
+
+                - name: connection_time_of_death_sets
+                  type: integer
+
+                - name: session_d_handles_swept
+                  type: integer
+
+                - name: session_sweep_attempts
+                  type: integer
+
+            - name: log
+              type: group
+              fields:
+                - name: log_buff_size_increases
+                  type: integer
+
+                - name: total_log_buffer_size
+                  type: integer
+
+                - name: load_bytes_of_payload_data
+                  type: integer
+
+                - name: log_bytes_written
+                  type: integer
+
+                - name: yields_waiting_for_previous_log_file_close
+                  type: integer
+
+                - name: total_size_of_compressed_records
+                  type: integer
+
+                - name: total_in_memory_size_of_compressed_records
+                  type: integer
+
+                - name: log_records_too_small_to_compress
+                  type: integer
+
+                - name: log_records_not_compressed
+                  type: integer
+
+                - name: log_records_compressed
+                  type: integer
+
+                - name: max_log_file_size
+                  type: integer
+
+                - name: pre_allocated_log_files_prepared
+                  type: integer
+
+                - name: number_of_pre_allocated_log_files_to_create
+                  type: integer
+
+                - name: pre_allocated_log_files_used
+                  type: integer
+
+                - name: log_read_operations
+                  type: integer
+
+                - name: log_release_advances_write_lsn
+                  type: integer
+
+                - name: records_processed_by_log_scan
+                  type: integer
+
+                - name: log_scan_records_requiring_two_reads
+                  type: integer
+
+                - name: log_scan_operations
+                  type: integer
+
+                - name: consolidated slot closures
+                  type: integer
+
+                - name: logging_bytes_consolidated
+                  type: integer
+
+                - name: consolidated_slot_joins
+                  type: integer
+
+                - name: consolidated_slot_joins_races
+                  type: integer
+
+                - name: slots_selected_for_switching_that_were_unavailable
+                  type: integer
+
+                - name: record_size_exceeded_maximum
+                  type: integer
+
+                - name: failed_to_find_a_slot_large_enough_for_record
+                  type: integer
+
+                - name: consolidated slot join transitions
+                  type: integer
+
+                - name: log_sync_operations
+                  type: integer
+
+                - name: log_sync_dir_operations
+                  type: integer
+
+                - name: log_write_operations
+                  type: integer
+
+            - name: reconciliation
+              type: group
+              fields:
+                - name: page_reconciliation_calls
+                  type: integer
+
+                - name: page_reconciliation_calls_for_eviction
+                  type: integer
+
+                - name: split_bytes_currently_awaiting_free
+                  type: integer
+
+                - name: split_objects_currently_awaiting_free
+                  type: integer
+
+            - name: session
+              type: group
+              fields:
+                - name: open_cursor_count
+                  type: integer
+
+                - name: open_session_count
+                  type: integer
+
+            - name: thread_yield
+              type: group
+              fields:
+                - name: page_acquire_busy_blocked
+                  type: integer
+
+                - name: page_acquire_eviction_blocked
+                  type: integer
+
+                - name: page_acquire_locked_blocked
+                  type: integer
+
+                - name: page_acquire_read_blocked
+                  type: integer
+
+                - name: page_acquire_time_sleeping
+                  type: integer
+
+            - name: transaction
+              type: group
+              fields:
+                - name: transaction_begins
+                  type: integer
+
+                - name: tansaction_checkpoints
+                  type: integer
+
+                - name: transaction_checkpoint_currently_running
+                  type: integer
+
+                - name: transaction_checkpoint_max_time_ms
+                  type: integer
+
+                - name: transaction_checkpoint_min_time_ms
+                  type: integer
+
+                - name: transaction_checkpoint_most_recent_time_ms
+                  type: integer
+
+                - name: transaction_checkpoint_total_time_ms
+                  type: integer
+
+                - name: transactions_committed
+                  type: integer
+
+                - name: transaction_failures_due_to_cache_overflow
+                  type: integer
+
+                - name: transaction_range_of_ids_currently_pinned
+                  type: integer
+
+                - name: transactions_rolled_back
+                  type: integer
+
+            - name: concurrent_transactions
+              type: group
+              fields:
+
+                - name: write
+                  type: group
+                  fields:
+                    - name: out
+                      type: integer
+
+                    - name: available
+                      type: integer
+
+                    - name: total_tickets
+                      type: integer
+
+                - name: read
+                  type: group
+                  fields:
+                    - name: out
+                      type: integer
+
+                    - name: available
+                      type: integer
+
+                    - name: total_tickets
+                      type: integer

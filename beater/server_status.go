@@ -2,7 +2,6 @@ package beater
 
 import (
 	"fmt"
-	"os"
 	"time"
 
 	"github.com/elastic/beats/libbeat/beat"
@@ -36,10 +35,7 @@ func (bt *Mongobeat) getServerStatus(b *beat.Beat) {
 		"server_status": results,
 	}
 
-	fmt.Printf("%v", event)
-	os.Exit(0)
-
 	// fire
 	bt.client.PublishEvent(event)
-	logp.Info("dbStats Event sent")
+	logp.Info("server_status Event sent")
 }

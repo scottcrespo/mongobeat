@@ -38,12 +38,43 @@
             }
           }
         },
-        "counter": {
-          "type": "long"
-        },
-        "databases": {
-          "norms": false,
-          "type": "text"
+        "db_stats": {
+          "properties": {
+            "avg_obj_size": {
+              "type": "long"
+            },
+            "collections": {
+              "type": "long"
+            },
+            "data_size": {
+              "type": "long"
+            },
+            "db": {
+              "ignore_above": 1024,
+              "type": "keyword"
+            },
+            "file_size": {
+              "type": "long"
+            },
+            "index_size": {
+              "type": "long"
+            },
+            "indexes": {
+              "type": "long"
+            },
+            "num_extents": {
+              "type": "long"
+            },
+            "objects": {
+              "type": "long"
+            },
+            "ok": {
+              "type": "long"
+            },
+            "storage_size": {
+              "type": "long"
+            }
+          }
         },
         "meta": {
           "properties": {
@@ -77,7 +108,1224 @@
             }
           }
         },
+        "server_status": {
+          "properties": {
+            "advisor_host_fqdns": {
+              "ignore_above": 1024,
+              "type": "keyword"
+            },
+            "asserts": {
+              "properties": {
+                "msg": {
+                  "type": "long"
+                },
+                "regular": {
+                  "type": "long"
+                },
+                "rollovers": {
+                  "type": "long"
+                },
+                "user": {
+                  "type": "long"
+                },
+                "warning": {
+                  "type": "long"
+                }
+              }
+            },
+            "background_flushing": {
+              "properties": {
+                "avg_ms": {
+                  "type": "long"
+                },
+                "flushes": {
+                  "type": "long"
+                },
+                "last_finished": {
+                  "type": "date"
+                },
+                "total_ms": {
+                  "type": "long"
+                }
+              }
+            },
+            "connections": {
+              "properties": {
+                "available": {
+                  "type": "long"
+                },
+                "current": {
+                  "type": "long"
+                },
+                "total_created": {
+                  "type": "long"
+                }
+              }
+            },
+            "dur": {
+              "properties": {
+                "commits": {
+                  "type": "long"
+                },
+                "commits_in_write_lock": {
+                  "type": "long"
+                },
+                "compression": {
+                  "type": "long"
+                },
+                "early_commits": {
+                  "type": "long"
+                },
+                "journaled_mb": {
+                  "type": "long"
+                },
+                "time_ms": {
+                  "properties": {
+                    "commits": {
+                      "type": "long"
+                    },
+                    "commits_in_write_lock": {
+                      "type": "long"
+                    },
+                    "dt": {
+                      "type": "long"
+                    },
+                    "prep_log_buffer": {
+                      "type": "long"
+                    },
+                    "remap_private_view": {
+                      "type": "long"
+                    },
+                    "write_to_journal": {
+                      "type": "long"
+                    }
+                  }
+                },
+                "write_to_data_files_mv": {
+                  "type": "long"
+                }
+              }
+            },
+            "extra_info": {
+              "properties": {
+                "heap_usage_bytes": {
+                  "type": "long"
+                },
+                "note": {
+                  "norms": false,
+                  "type": "text"
+                },
+                "page_faults": {
+                  "type": "long"
+                }
+              }
+            },
+            "global_lock": {
+              "properties": {
+                "active_clients": {
+                  "properties": {
+                    "readers": {
+                      "type": "long"
+                    },
+                    "total": {
+                      "type": "long"
+                    },
+                    "writers": {
+                      "type": "long"
+                    }
+                  }
+                },
+                "current_queue": {
+                  "properties": {
+                    "readers": {
+                      "type": "long"
+                    },
+                    "total": {
+                      "type": "long"
+                    },
+                    "writers": {
+                      "type": "long"
+                    }
+                  }
+                },
+                "total_time": {
+                  "type": "long"
+                }
+              }
+            },
+            "host": {
+              "ignore_above": 1024,
+              "type": "keyword"
+            },
+            "local_time": {
+              "type": "date"
+            },
+            "locks": {
+              "properties": {
+                "collection": {
+                  "properties": {
+                    "acquire_count": {
+                      "properties": {
+                        "exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_shared_lock": {
+                          "type": "long"
+                        },
+                        "shared_lock": {
+                          "type": "long"
+                        }
+                      }
+                    },
+                    "acquire_wait_count": {
+                      "properties": {
+                        "exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_shared_lock": {
+                          "type": "long"
+                        },
+                        "shared_lock": {
+                          "type": "long"
+                        }
+                      }
+                    },
+                    "dead_lock_count": {
+                      "properties": {
+                        "exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_shared_lock": {
+                          "type": "long"
+                        },
+                        "shared_lock": {
+                          "type": "long"
+                        }
+                      }
+                    },
+                    "time_acquiring_micros": {
+                      "properties": {
+                        "exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_shared_lock": {
+                          "type": "long"
+                        },
+                        "shared_lock": {
+                          "type": "long"
+                        }
+                      }
+                    }
+                  }
+                },
+                "database": {
+                  "properties": {
+                    "acquire_count": {
+                      "properties": {
+                        "exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_shared_lock": {
+                          "type": "long"
+                        },
+                        "shared_lock": {
+                          "type": "long"
+                        }
+                      }
+                    },
+                    "acquire_wait_count": {
+                      "properties": {
+                        "exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_shared_lock": {
+                          "type": "long"
+                        },
+                        "shared_lock": {
+                          "type": "long"
+                        }
+                      }
+                    },
+                    "dead_lock_count": {
+                      "properties": {
+                        "exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_shared_lock": {
+                          "type": "long"
+                        },
+                        "shared_lock": {
+                          "type": "long"
+                        }
+                      }
+                    },
+                    "time_acquiring_micros": {
+                      "properties": {
+                        "exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_shared_lock": {
+                          "type": "long"
+                        },
+                        "shared_lock": {
+                          "type": "long"
+                        }
+                      }
+                    }
+                  }
+                },
+                "global": {
+                  "properties": {
+                    "acquire_count": {
+                      "properties": {
+                        "exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_shared_lock": {
+                          "type": "long"
+                        },
+                        "shared_lock": {
+                          "type": "long"
+                        }
+                      }
+                    },
+                    "acquire_wait_count": {
+                      "properties": {
+                        "exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_shared_lock": {
+                          "type": "long"
+                        },
+                        "shared_lock": {
+                          "type": "long"
+                        }
+                      }
+                    },
+                    "dead_lock_count": {
+                      "properties": {
+                        "exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_shared_lock": {
+                          "type": "long"
+                        },
+                        "shared_lock": {
+                          "type": "long"
+                        }
+                      }
+                    },
+                    "time_acquiring_micros": {
+                      "properties": {
+                        "exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_shared_lock": {
+                          "type": "long"
+                        },
+                        "shared_lock": {
+                          "type": "long"
+                        }
+                      }
+                    }
+                  }
+                },
+                "metadata": {
+                  "properties": {
+                    "acquire_count": {
+                      "properties": {
+                        "exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_shared_lock": {
+                          "type": "long"
+                        },
+                        "shared_lock": {
+                          "type": "long"
+                        }
+                      }
+                    },
+                    "acquire_wait_count": {
+                      "properties": {
+                        "exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_shared_lock": {
+                          "type": "long"
+                        },
+                        "shared_lock": {
+                          "type": "long"
+                        }
+                      }
+                    },
+                    "dead_lock_count": {
+                      "properties": {
+                        "exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_shared_lock": {
+                          "type": "long"
+                        },
+                        "shared_lock": {
+                          "type": "long"
+                        }
+                      }
+                    },
+                    "time_acquiring_micros": {
+                      "properties": {
+                        "exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_shared_lock": {
+                          "type": "long"
+                        },
+                        "shared_lock": {
+                          "type": "long"
+                        }
+                      }
+                    }
+                  }
+                },
+                "mmap_v1_journal": {
+                  "properties": {
+                    "acquire_count": {
+                      "properties": {
+                        "exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_shared_lock": {
+                          "type": "long"
+                        },
+                        "shared_lock": {
+                          "type": "long"
+                        }
+                      }
+                    },
+                    "acquire_wait_count": {
+                      "properties": {
+                        "exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_shared_lock": {
+                          "type": "long"
+                        },
+                        "shared_lock": {
+                          "type": "long"
+                        }
+                      }
+                    },
+                    "dead_lock_count": {
+                      "properties": {
+                        "exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_shared_lock": {
+                          "type": "long"
+                        },
+                        "shared_lock": {
+                          "type": "long"
+                        }
+                      }
+                    },
+                    "time_acquiring_micros": {
+                      "properties": {
+                        "exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_shared_lock": {
+                          "type": "long"
+                        },
+                        "shared_lock": {
+                          "type": "long"
+                        }
+                      }
+                    }
+                  }
+                },
+                "oplog": {
+                  "properties": {
+                    "acquire_count": {
+                      "properties": {
+                        "exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_shared_lock": {
+                          "type": "long"
+                        },
+                        "shared_lock": {
+                          "type": "long"
+                        }
+                      }
+                    },
+                    "acquire_wait_count": {
+                      "properties": {
+                        "exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_shared_lock": {
+                          "type": "long"
+                        },
+                        "shared_lock": {
+                          "type": "long"
+                        }
+                      }
+                    },
+                    "dead_lock_count": {
+                      "properties": {
+                        "exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_shared_lock": {
+                          "type": "long"
+                        },
+                        "shared_lock": {
+                          "type": "long"
+                        }
+                      }
+                    },
+                    "time_acquiring_micros": {
+                      "properties": {
+                        "exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_exclusive_lock": {
+                          "type": "long"
+                        },
+                        "intent_shared_lock": {
+                          "type": "long"
+                        },
+                        "shared_lock": {
+                          "type": "long"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "network": {
+              "properties": {
+                "bytes_in": {
+                  "type": "long"
+                },
+                "bytes_out": {
+                  "type": "long"
+                },
+                "num_requests": {
+                  "type": "long"
+                }
+              }
+            },
+            "ok": {
+              "type": "long"
+            },
+            "ops_counters": {
+              "properties": {
+                "command": {
+                  "type": "long"
+                },
+                "delete": {
+                  "type": "long"
+                },
+                "get_more": {
+                  "type": "long"
+                },
+                "insert": {
+                  "type": "long"
+                },
+                "query": {
+                  "type": "long"
+                },
+                "update": {
+                  "type": "long"
+                }
+              }
+            },
+            "ops_counters_repl": {
+              "properties": {
+                "command": {
+                  "type": "long"
+                },
+                "delete": {
+                  "type": "long"
+                },
+                "get_more": {
+                  "type": "long"
+                },
+                "insert": {
+                  "type": "long"
+                },
+                "query": {
+                  "type": "long"
+                },
+                "update": {
+                  "type": "long"
+                }
+              }
+            },
+            "pid": {
+              "type": "long"
+            },
+            "process": {
+              "ignore_above": 1024,
+              "type": "keyword"
+            },
+            "repl": {
+              "properties": {
+                "election_id": {
+                  "ignore_above": 1024,
+                  "type": "keyword"
+                },
+                "hosts": {
+                  "ignore_above": 1024,
+                  "type": "keyword"
+                },
+                "is_master": {
+                  "type": "boolean"
+                },
+                "me": {
+                  "ignore_above": 1024,
+                  "type": "keyword"
+                },
+                "primary": {
+                  "ignore_above": 1024,
+                  "type": "keyword"
+                },
+                "rbid": {
+                  "type": "long"
+                },
+                "secondary": {
+                  "type": "boolean"
+                },
+                "set_name": {
+                  "ignore_above": 1024,
+                  "type": "keyword"
+                },
+                "set_version": {
+                  "ignore_above": 1024,
+                  "type": "keyword"
+                },
+                "slaves": {
+                  "properties": {
+                    "host": {
+                      "ignore_above": 1024,
+                      "type": "keyword"
+                    },
+                    "member_id": {
+                      "type": "long"
+                    },
+                    "op_time": {
+                      "type": "date"
+                    },
+                    "rid": {
+                      "ignore_above": 1024,
+                      "type": "keyword"
+                    }
+                  },
+                  "type": "nested"
+                }
+              }
+            },
+            "storage_engine": {
+              "properties": {
+                "name": {
+                  "ignore_above": 1024,
+                  "type": "keyword"
+                },
+                "persistent": {
+                  "type": "boolean"
+                },
+                "supports_committed_reads": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "uptime": {
+              "type": "long"
+            },
+            "uptime_estimate": {
+              "type": "long"
+            },
+            "uptime_ms": {
+              "type": "long"
+            },
+            "version": {
+              "ignore_above": 1024,
+              "type": "keyword"
+            },
+            "wired_tiger": {
+              "properties": {
+                "async": {
+                  "properties": {
+                    "current_work_queue_length": {
+                      "type": "long"
+                    },
+                    "maximum_work_queue_length": {
+                      "type": "long"
+                    },
+                    "number_of_allocation_state_races": {
+                      "type": "long"
+                    },
+                    "number_of_flush_calls": {
+                      "type": "long"
+                    },
+                    "number_of_operation_slots_viewed_for_allocation": {
+                      "type": "long"
+                    },
+                    "number_of_times_operation_allocation_failed": {
+                      "type": "long"
+                    },
+                    "number_of_times_worker_found_no_work": {
+                      "type": "long"
+                    },
+                    "total_allocations": {
+                      "type": "long"
+                    },
+                    "total_compact_calls": {
+                      "type": "long"
+                    },
+                    "total_insert_calls": {
+                      "type": "long"
+                    },
+                    "total_remove_calls": {
+                      "type": "long"
+                    },
+                    "total_search_calls": {
+                      "type": "long"
+                    },
+                    "total_update_calls": {
+                      "type": "long"
+                    }
+                  }
+                },
+                "block_manager": {
+                  "properties": {
+                    "blocks_pre_loaded": {
+                      "type": "long"
+                    },
+                    "blocks_read": {
+                      "type": "long"
+                    },
+                    "blocks_written": {
+                      "type": "long"
+                    },
+                    "bytes_read": {
+                      "type": "long"
+                    },
+                    "bytes_written": {
+                      "type": "long"
+                    },
+                    "mapped_blocked_read": {
+                      "type": "long"
+                    },
+                    "mapped_bytes_read": {
+                      "type": "long"
+                    }
+                  }
+                },
+                "cache": {
+                  "properties": {
+                    "bytes_currently_in_the_cache": {
+                      "type": "long"
+                    },
+                    "bytes_read_into_cache": {
+                      "type": "long"
+                    },
+                    "bytes_written_from_cache": {
+                      "type": "long"
+                    },
+                    "checkpoint_blocked_page_eviction": {
+                      "type": "long"
+                    },
+                    "eviction_server_candidate_queue_empty_when_topping_up": {
+                      "type": "long"
+                    },
+                    "eviction_server_candidate_queue_not_empty_when_topping_up": {
+                      "type": "long"
+                    },
+                    "eviction_server_evicting_pages": {
+                      "type": "long"
+                    },
+                    "eviction_server_populating_queue_but_not_evicting_pages": {
+                      "type": "long"
+                    },
+                    "eviction_server_unable_to_reach_eviction_goal": {
+                      "type": "long"
+                    },
+                    "eviction_worker_thread_evicting_pages": {
+                      "type": "long"
+                    },
+                    "failed_eviction_of_pages_that_exceeded_the_in_memory_maximum": {
+                      "type": "long"
+                    },
+                    "hazard_pointer_blocked_page_eviction": {
+                      "type": "long"
+                    },
+                    "in_memory_page_splits": {
+                      "type": "long"
+                    },
+                    "internal_pages_evicted": {
+                      "type": "long"
+                    },
+                    "max_page_size_at_eviction": {
+                      "type": "long"
+                    },
+                    "maximum_bytes_configured": {
+                      "type": "long"
+                    },
+                    "modified_pages_evicted": {
+                      "type": "long"
+                    },
+                    "page_split_during_eviction_deepened_the_tree": {
+                      "type": "long"
+                    },
+                    "pages_currently_held_in_the_cache": {
+                      "type": "long"
+                    },
+                    "pages_evicted_because_they_exceeded_the_in_memory_maximum": {
+                      "type": "long"
+                    },
+                    "pages_evicted_because_they_had_chains_of_deleted_items": {
+                      "type": "long"
+                    },
+                    "pages_evicted_by_application_threads": {
+                      "type": "long"
+                    },
+                    "pages_read_into_cache": {
+                      "type": "long"
+                    },
+                    "pages_selected_for_eviction_unable_to_be_evicted": {
+                      "type": "long"
+                    },
+                    "pages_split_during_eviction": {
+                      "type": "long"
+                    },
+                    "pages_walked_for_eviction": {
+                      "type": "long"
+                    },
+                    "pages_written_from_cache": {
+                      "type": "long"
+                    },
+                    "percentage_overhead": {
+                      "type": "long"
+                    },
+                    "tracked_dirty_bytes_in_the_cache": {
+                      "type": "long"
+                    },
+                    "tracked_dirty_pages_in_the_cache": {
+                      "type": "long"
+                    },
+                    "unmodified_pages_evicted": {
+                      "type": "long"
+                    }
+                  }
+                },
+                "concurrent_transactions": {
+                  "properties": {
+                    "read": {
+                      "properties": {
+                        "available": {
+                          "type": "long"
+                        },
+                        "out": {
+                          "type": "long"
+                        },
+                        "total_tickets": {
+                          "type": "long"
+                        }
+                      }
+                    },
+                    "write": {
+                      "properties": {
+                        "available": {
+                          "type": "long"
+                        },
+                        "out": {
+                          "type": "long"
+                        },
+                        "total_tickets": {
+                          "type": "long"
+                        }
+                      }
+                    }
+                  }
+                },
+                "connection": {
+                  "properties": {
+                    "files_currently_open": {
+                      "type": "long"
+                    },
+                    "memory_allocations": {
+                      "type": "long"
+                    },
+                    "memory_frees": {
+                      "type": "long"
+                    },
+                    "memory_re_allocations": {
+                      "type": "long"
+                    },
+                    "pthread_mutex_condition_wait_calls": {
+                      "type": "long"
+                    },
+                    "pthread_mutex_shared_lock_read_lock_calls": {
+                      "type": "long"
+                    },
+                    "pthread_mutex_shared_lock_write_lock_calls": {
+                      "type": "long"
+                    },
+                    "total_read_IOs": {
+                      "type": "long"
+                    },
+                    "total_write_IOs": {
+                      "type": "long"
+                    }
+                  }
+                },
+                "cursor": {
+                  "properties": {
+                    "cursor_create_calls": {
+                      "type": "long"
+                    },
+                    "cursor_insert_calls": {
+                      "type": "long"
+                    },
+                    "cursor_next_calls": {
+                      "type": "long"
+                    },
+                    "cursor_prev_calls": {
+                      "type": "long"
+                    },
+                    "cursor_remove_calls": {
+                      "type": "long"
+                    },
+                    "cursor_reset_calls": {
+                      "type": "long"
+                    },
+                    "cursor_search_calls": {
+                      "type": "long"
+                    },
+                    "cursor_search_near_calls": {
+                      "type": "long"
+                    },
+                    "cursor_update_calls": {
+                      "type": "long"
+                    }
+                  }
+                },
+                "data_handle": {
+                  "properties": {
+                    "connection_candidate_referenced": {
+                      "type": "long"
+                    },
+                    "connection_d_handles_swept": {
+                      "type": "long"
+                    },
+                    "connection_sweeps": {
+                      "type": "long"
+                    },
+                    "connection_time_of_death_sets": {
+                      "type": "long"
+                    },
+                    "session_d_handles_swept": {
+                      "type": "long"
+                    },
+                    "session_sweep_attempts": {
+                      "type": "long"
+                    }
+                  }
+                },
+                "log": {
+                  "properties": {
+                    "consolidated slot closures": {
+                      "type": "long"
+                    },
+                    "consolidated slot join transitions": {
+                      "type": "long"
+                    },
+                    "consolidated_slot_joins": {
+                      "type": "long"
+                    },
+                    "consolidated_slot_joins_races": {
+                      "type": "long"
+                    },
+                    "failed_to_find_a_slot_large_enough_for_record": {
+                      "type": "long"
+                    },
+                    "load_bytes_of_payload_data": {
+                      "type": "long"
+                    },
+                    "log_buff_size_increases": {
+                      "type": "long"
+                    },
+                    "log_bytes_written": {
+                      "type": "long"
+                    },
+                    "log_read_operations": {
+                      "type": "long"
+                    },
+                    "log_records_compressed": {
+                      "type": "long"
+                    },
+                    "log_records_not_compressed": {
+                      "type": "long"
+                    },
+                    "log_records_too_small_to_compress": {
+                      "type": "long"
+                    },
+                    "log_release_advances_write_lsn": {
+                      "type": "long"
+                    },
+                    "log_scan_operations": {
+                      "type": "long"
+                    },
+                    "log_scan_records_requiring_two_reads": {
+                      "type": "long"
+                    },
+                    "log_sync_dir_operations": {
+                      "type": "long"
+                    },
+                    "log_sync_operations": {
+                      "type": "long"
+                    },
+                    "log_write_operations": {
+                      "type": "long"
+                    },
+                    "logging_bytes_consolidated": {
+                      "type": "long"
+                    },
+                    "max_log_file_size": {
+                      "type": "long"
+                    },
+                    "number_of_pre_allocated_log_files_to_create": {
+                      "type": "long"
+                    },
+                    "pre_allocated_log_files_prepared": {
+                      "type": "long"
+                    },
+                    "pre_allocated_log_files_used": {
+                      "type": "long"
+                    },
+                    "record_size_exceeded_maximum": {
+                      "type": "long"
+                    },
+                    "records_processed_by_log_scan": {
+                      "type": "long"
+                    },
+                    "slots_selected_for_switching_that_were_unavailable": {
+                      "type": "long"
+                    },
+                    "total_in_memory_size_of_compressed_records": {
+                      "type": "long"
+                    },
+                    "total_log_buffer_size": {
+                      "type": "long"
+                    },
+                    "total_size_of_compressed_records": {
+                      "type": "long"
+                    },
+                    "yields_waiting_for_previous_log_file_close": {
+                      "type": "long"
+                    }
+                  }
+                },
+                "lsm": {
+                  "properties": {
+                    "application_work_units_currently_queued": {
+                      "type": "long"
+                    },
+                    "merge_work_units_currently_queued": {
+                      "type": "long"
+                    },
+                    "rows_merged_in_an_lsm_tree": {
+                      "type": "long"
+                    },
+                    "sleep_for_lsm_checkpoint_throttle": {
+                      "type": "long"
+                    },
+                    "sleep_for_lsm_merge_throttle": {
+                      "type": "long"
+                    },
+                    "switch_work_units_currently_queued": {
+                      "type": "long"
+                    },
+                    "tree_maintenance_operations_discarded": {
+                      "type": "long"
+                    },
+                    "tree_maintenance_operations_executed": {
+                      "type": "long"
+                    },
+                    "tree_maintenance_operations_scheduled": {
+                      "type": "long"
+                    },
+                    "tree_queue_hit_maximum": {
+                      "type": "long"
+                    }
+                  }
+                },
+                "reconciliation": {
+                  "properties": {
+                    "page_reconciliation_calls": {
+                      "type": "long"
+                    },
+                    "page_reconciliation_calls_for_eviction": {
+                      "type": "long"
+                    },
+                    "split_bytes_currently_awaiting_free": {
+                      "type": "long"
+                    },
+                    "split_objects_currently_awaiting_free": {
+                      "type": "long"
+                    }
+                  }
+                },
+                "session": {
+                  "properties": {
+                    "open_cursor_count": {
+                      "type": "long"
+                    },
+                    "open_session_count": {
+                      "type": "long"
+                    }
+                  }
+                },
+                "thread_yield": {
+                  "properties": {
+                    "page_acquire_busy_blocked": {
+                      "type": "long"
+                    },
+                    "page_acquire_eviction_blocked": {
+                      "type": "long"
+                    },
+                    "page_acquire_locked_blocked": {
+                      "type": "long"
+                    },
+                    "page_acquire_read_blocked": {
+                      "type": "long"
+                    },
+                    "page_acquire_time_sleeping": {
+                      "type": "long"
+                    }
+                  }
+                },
+                "transaction": {
+                  "properties": {
+                    "tansaction_checkpoints": {
+                      "type": "long"
+                    },
+                    "transaction_begins": {
+                      "type": "long"
+                    },
+                    "transaction_checkpoint_currently_running": {
+                      "type": "long"
+                    },
+                    "transaction_checkpoint_max_time_ms": {
+                      "type": "long"
+                    },
+                    "transaction_checkpoint_min_time_ms": {
+                      "type": "long"
+                    },
+                    "transaction_checkpoint_most_recent_time_ms": {
+                      "type": "long"
+                    },
+                    "transaction_checkpoint_total_time_ms": {
+                      "type": "long"
+                    },
+                    "transaction_failures_due_to_cache_overflow": {
+                      "type": "long"
+                    },
+                    "transaction_range_of_ids_currently_pinned": {
+                      "type": "long"
+                    },
+                    "transactions_committed": {
+                      "type": "long"
+                    },
+                    "transactions_rolled_back": {
+                      "type": "long"
+                    }
+                  }
+                },
+                "uri": {
+                  "ignore_above": 1024,
+                  "type": "keyword"
+                }
+              }
+            }
+          }
+        },
         "tags": {
+          "ignore_above": 1024,
+          "type": "keyword"
+        },
+        "type": {
           "ignore_above": 1024,
           "type": "keyword"
         }

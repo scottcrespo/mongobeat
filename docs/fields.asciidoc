@@ -14,7 +14,9 @@ grouped in the following categories:
 
 * <<exported-fields-beat>>
 * <<exported-fields-cloud>>
-* <<exported-fields-mongobeat>>
+* <<exported-fields-db_stats>>
+* <<exported-fields-defaults>>
+* <<exported-fields-mongobeat.server_status>>
 
 --
 [[exported-fields-beat]]
@@ -121,29 +123,1714 @@ Name of the project in Google Cloud.
 Region in which this host is running.
 
 
-[[exported-fields-mongobeat]]
-== mongobeat Fields
+[[exported-fields-db_stats]]
+== db_stats Fields
 
 None
 
 
+
 [float]
-=== counter
+=== db_stats.avg_obj_size
 
 type: long
 
-required: True
+[float]
+=== db_stats.collections
 
-PLEASE UPDATE DOCUMENTATION
+type: integer
+
+[float]
+=== db_stats.data_size
+
+type: long
+
+[float]
+=== db_stats.db
+
+type: keyword
+
+[float]
+=== db_stats.file_size
+
+type: long
+
+[float]
+=== db_stats.index_size
+
+type: long
+
+[float]
+=== db_stats.indexes
+
+type: long
+
+[float]
+=== db_stats.num_extents
+
+type: long
+
+[float]
+=== db_stats.objects
+
+type: long
+
+[float]
+=== db_stats.ok
+
+type: integer
+
+[float]
+=== db_stats.storage_size
+
+type: long
+
+[[exported-fields-defaults]]
+== defaults Fields
+
+defaults
 
 
 [float]
-=== databases
+=== type
 
-type: text
+type: keyword
 
 required: True
 
-PLEASE UPDATE DOCUMENTATION
+[[exported-fields-mongobeat.server_status]]
+== mongobeat.server_status Fields
 
+None
+
+
+
+[float]
+=== server_status.ok
+
+type: integer
+
+[float]
+=== server_status.host
+
+type: keyword
+
+[float]
+=== server_status.advisor_host_fqdns
+
+type: keyword
+
+[float]
+=== server_status.version
+
+type: keyword
+
+[float]
+=== server_status.process
+
+type: keyword
+
+[float]
+=== server_status.pid
+
+type: long
+
+[float]
+=== server_status.uptime
+
+type: integer
+
+[float]
+=== server_status.uptime_ms
+
+type: long
+
+[float]
+=== server_status.uptime_estimate
+
+type: integer
+
+[float]
+=== server_status.local_time
+
+type: date
+
+example: 2015-01-24 14:06:05.071000
+
+format: YYYY-MM-DDTHH:MM:SS.milliZ
+
+required: True
+
+
+[float]
+=== server_status.asserts.regular
+
+type: integer
+
+[float]
+=== server_status.asserts.warning
+
+type: integer
+
+[float]
+=== server_status.asserts.msg
+
+type: integer
+
+[float]
+=== server_status.asserts.user
+
+type: integer
+
+[float]
+=== server_status.asserts.rollovers
+
+type: integer
+
+
+[float]
+=== server_status.background_flushing.flushes
+
+type: integer
+
+[float]
+=== server_status.background_flushing.total_ms
+
+type: integer
+
+[float]
+=== server_status.background_flushing.avg_ms
+
+type: integer
+
+[float]
+=== server_status.background_flushing.last_finished
+
+type: date
+
+format: YYYY-MM-DDTHH:MM:SS.milliZ
+
+
+[float]
+=== server_status.connections.current
+
+type: integer
+
+[float]
+=== server_status.connections.available
+
+type: integer
+
+[float]
+=== server_status.connections.total_created
+
+type: long
+
+
+[float]
+=== server_status.dur.commits
+
+type: integer
+
+[float]
+=== server_status.dur.journaled_mb
+
+type: integer
+
+[float]
+=== server_status.dur.write_to_data_files_mv
+
+type: integer
+
+[float]
+=== server_status.dur.compression
+
+type: integer
+
+[float]
+=== server_status.dur.commits_in_write_lock
+
+type: integer
+
+[float]
+=== server_status.dur.early_commits
+
+type: integer
+
+
+[float]
+=== server_status.dur.time_ms.dt
+
+type: integer
+
+[float]
+=== server_status.dur.time_ms.prep_log_buffer
+
+type: integer
+
+[float]
+=== server_status.dur.time_ms.write_to_journal
+
+type: integer
+
+[float]
+=== server_status.dur.time_ms.remap_private_view
+
+type: integer
+
+[float]
+=== server_status.dur.time_ms.commits
+
+type: integer
+
+[float]
+=== server_status.dur.time_ms.commits_in_write_lock
+
+type: integer
+
+
+[float]
+=== server_status.extra_info.note
+
+type: text
+
+[float]
+=== server_status.extra_info.page_faults
+
+type: integer
+
+[float]
+=== server_status.extra_info.heap_usage_bytes
+
+type: long
+
+
+[float]
+=== server_status.global_lock.total_time
+
+type: long
+
+
+[float]
+=== server_status.global_lock.current_queue.total
+
+type: integer
+
+[float]
+=== server_status.global_lock.current_queue.readers
+
+type: integer
+
+[float]
+=== server_status.global_lock.current_queue.writers
+
+type: integer
+
+
+[float]
+=== server_status.global_lock.active_clients.total
+
+type: integer
+
+[float]
+=== server_status.global_lock.active_clients.readers
+
+type: integer
+
+[float]
+=== server_status.global_lock.active_clients.writers
+
+type: integer
+
+
+
+
+[float]
+=== server_status.locks.global.acquire_count.intent_shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.global.acquire_count.shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.global.acquire_count.intent_exclusive_lock
+
+type: long
+
+[float]
+=== server_status.locks.global.acquire_count.exclusive_lock
+
+type: long
+
+
+[float]
+=== server_status.locks.global.acquire_wait_count.intent_shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.global.acquire_wait_count.shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.global.acquire_wait_count.intent_exclusive_lock
+
+type: long
+
+[float]
+=== server_status.locks.global.acquire_wait_count.exclusive_lock
+
+type: long
+
+
+[float]
+=== server_status.locks.global.time_acquiring_micros.intent_shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.global.time_acquiring_micros.shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.global.time_acquiring_micros.intent_exclusive_lock
+
+type: long
+
+[float]
+=== server_status.locks.global.time_acquiring_micros.exclusive_lock
+
+type: long
+
+
+[float]
+=== server_status.locks.global.dead_lock_count.intent_shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.global.dead_lock_count.shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.global.dead_lock_count.intent_exclusive_lock
+
+type: long
+
+[float]
+=== server_status.locks.global.dead_lock_count.exclusive_lock
+
+type: long
+
+
+
+[float]
+=== server_status.locks.mmap_v1_journal.acquire_count.intent_shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.mmap_v1_journal.acquire_count.shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.mmap_v1_journal.acquire_count.intent_exclusive_lock
+
+type: long
+
+[float]
+=== server_status.locks.mmap_v1_journal.acquire_count.exclusive_lock
+
+type: long
+
+
+[float]
+=== server_status.locks.mmap_v1_journal.acquire_wait_count.intent_shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.mmap_v1_journal.acquire_wait_count.shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.mmap_v1_journal.acquire_wait_count.intent_exclusive_lock
+
+type: long
+
+[float]
+=== server_status.locks.mmap_v1_journal.acquire_wait_count.exclusive_lock
+
+type: long
+
+
+[float]
+=== server_status.locks.mmap_v1_journal.time_acquiring_micros.intent_shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.mmap_v1_journal.time_acquiring_micros.shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.mmap_v1_journal.time_acquiring_micros.intent_exclusive_lock
+
+type: long
+
+[float]
+=== server_status.locks.mmap_v1_journal.time_acquiring_micros.exclusive_lock
+
+type: long
+
+
+[float]
+=== server_status.locks.mmap_v1_journal.dead_lock_count.intent_shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.mmap_v1_journal.dead_lock_count.shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.mmap_v1_journal.dead_lock_count.intent_exclusive_lock
+
+type: long
+
+[float]
+=== server_status.locks.mmap_v1_journal.dead_lock_count.exclusive_lock
+
+type: long
+
+
+
+[float]
+=== server_status.locks.database.acquire_count.intent_shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.database.acquire_count.shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.database.acquire_count.intent_exclusive_lock
+
+type: long
+
+[float]
+=== server_status.locks.database.acquire_count.exclusive_lock
+
+type: long
+
+
+[float]
+=== server_status.locks.database.acquire_wait_count.intent_shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.database.acquire_wait_count.shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.database.acquire_wait_count.intent_exclusive_lock
+
+type: long
+
+[float]
+=== server_status.locks.database.acquire_wait_count.exclusive_lock
+
+type: long
+
+
+[float]
+=== server_status.locks.database.time_acquiring_micros.intent_shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.database.time_acquiring_micros.shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.database.time_acquiring_micros.intent_exclusive_lock
+
+type: long
+
+[float]
+=== server_status.locks.database.time_acquiring_micros.exclusive_lock
+
+type: long
+
+
+[float]
+=== server_status.locks.database.dead_lock_count.intent_shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.database.dead_lock_count.shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.database.dead_lock_count.intent_exclusive_lock
+
+type: long
+
+[float]
+=== server_status.locks.database.dead_lock_count.exclusive_lock
+
+type: long
+
+
+
+[float]
+=== server_status.locks.collection.acquire_count.intent_shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.collection.acquire_count.shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.collection.acquire_count.intent_exclusive_lock
+
+type: long
+
+[float]
+=== server_status.locks.collection.acquire_count.exclusive_lock
+
+type: long
+
+
+[float]
+=== server_status.locks.collection.acquire_wait_count.intent_shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.collection.acquire_wait_count.shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.collection.acquire_wait_count.intent_exclusive_lock
+
+type: long
+
+[float]
+=== server_status.locks.collection.acquire_wait_count.exclusive_lock
+
+type: long
+
+
+[float]
+=== server_status.locks.collection.time_acquiring_micros.intent_shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.collection.time_acquiring_micros.shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.collection.time_acquiring_micros.intent_exclusive_lock
+
+type: long
+
+[float]
+=== server_status.locks.collection.time_acquiring_micros.exclusive_lock
+
+type: long
+
+
+[float]
+=== server_status.locks.collection.dead_lock_count.intent_shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.collection.dead_lock_count.shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.collection.dead_lock_count.intent_exclusive_lock
+
+type: long
+
+[float]
+=== server_status.locks.collection.dead_lock_count.exclusive_lock
+
+type: long
+
+
+
+[float]
+=== server_status.locks.metadata.acquire_count.intent_shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.metadata.acquire_count.shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.metadata.acquire_count.intent_exclusive_lock
+
+type: long
+
+[float]
+=== server_status.locks.metadata.acquire_count.exclusive_lock
+
+type: long
+
+
+[float]
+=== server_status.locks.metadata.acquire_wait_count.intent_shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.metadata.acquire_wait_count.shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.metadata.acquire_wait_count.intent_exclusive_lock
+
+type: long
+
+[float]
+=== server_status.locks.metadata.acquire_wait_count.exclusive_lock
+
+type: long
+
+
+[float]
+=== server_status.locks.metadata.time_acquiring_micros.intent_shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.metadata.time_acquiring_micros.shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.metadata.time_acquiring_micros.intent_exclusive_lock
+
+type: long
+
+[float]
+=== server_status.locks.metadata.time_acquiring_micros.exclusive_lock
+
+type: long
+
+
+[float]
+=== server_status.locks.metadata.dead_lock_count.intent_shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.metadata.dead_lock_count.shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.metadata.dead_lock_count.intent_exclusive_lock
+
+type: long
+
+[float]
+=== server_status.locks.metadata.dead_lock_count.exclusive_lock
+
+type: long
+
+
+
+[float]
+=== server_status.locks.oplog.acquire_count.intent_shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.oplog.acquire_count.shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.oplog.acquire_count.intent_exclusive_lock
+
+type: long
+
+[float]
+=== server_status.locks.oplog.acquire_count.exclusive_lock
+
+type: long
+
+
+[float]
+=== server_status.locks.oplog.acquire_wait_count.intent_shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.oplog.acquire_wait_count.shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.oplog.acquire_wait_count.intent_exclusive_lock
+
+type: long
+
+[float]
+=== server_status.locks.oplog.acquire_wait_count.exclusive_lock
+
+type: long
+
+
+[float]
+=== server_status.locks.oplog.time_acquiring_micros.intent_shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.oplog.time_acquiring_micros.shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.oplog.time_acquiring_micros.intent_exclusive_lock
+
+type: long
+
+[float]
+=== server_status.locks.oplog.time_acquiring_micros.exclusive_lock
+
+type: long
+
+
+[float]
+=== server_status.locks.oplog.dead_lock_count.intent_shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.oplog.dead_lock_count.shared_lock
+
+type: long
+
+[float]
+=== server_status.locks.oplog.dead_lock_count.intent_exclusive_lock
+
+type: long
+
+[float]
+=== server_status.locks.oplog.dead_lock_count.exclusive_lock
+
+type: long
+
+
+[float]
+=== server_status.network.bytes_in
+
+type: long
+
+[float]
+=== server_status.network.bytes_out
+
+type: long
+
+[float]
+=== server_status.network.num_requests
+
+type: long
+
+
+[float]
+=== server_status.ops_counters.insert
+
+type: integer
+
+[float]
+=== server_status.ops_counters.query
+
+type: integer
+
+[float]
+=== server_status.ops_counters.update
+
+type: integer
+
+[float]
+=== server_status.ops_counters.delete
+
+type: integer
+
+[float]
+=== server_status.ops_counters.get_more
+
+type: integer
+
+[float]
+=== server_status.ops_counters.command
+
+type: integer
+
+
+[float]
+=== server_status.ops_counters_repl.insert
+
+type: integer
+
+[float]
+=== server_status.ops_counters_repl.query
+
+type: integer
+
+[float]
+=== server_status.ops_counters_repl.update
+
+type: integer
+
+[float]
+=== server_status.ops_counters_repl.delete
+
+type: integer
+
+[float]
+=== server_status.ops_counters_repl.get_more
+
+type: integer
+
+[float]
+=== server_status.ops_counters_repl.command
+
+type: integer
+
+
+[float]
+=== server_status.repl.set_name
+
+type: keyword
+
+[float]
+=== server_status.repl.set_version
+
+type: keyword
+
+[float]
+=== server_status.repl.is_master
+
+type: boolean
+
+[float]
+=== server_status.repl.secondary
+
+type: boolean
+
+[float]
+=== server_status.repl.hosts
+
+type: keyword
+
+[float]
+=== server_status.repl.primary
+
+type: keyword
+
+[float]
+=== server_status.repl.me
+
+type: keyword
+
+[float]
+=== server_status.repl.election_id
+
+type: keyword
+
+[float]
+=== server_status.repl.rbid
+
+type: integer
+
+[float]
+=== server_status.repl.slaves
+
+type: nested
+
+
+[float]
+=== server_status.storage_engine.name
+
+type: keyword
+
+[float]
+=== server_status.storage_engine.supports_committed_reads
+
+type: boolean
+
+[float]
+=== server_status.storage_engine.persistent
+
+type: boolean
+
+
+[float]
+=== server_status.wired_tiger.uri
+
+type: keyword
+
+
+[float]
+=== server_status.wired_tiger.lsm.sleep_for_lsm_checkpoint_throttle
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.lsm.sleep_for_lsm_merge_throttle
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.lsm.rows_merged_in_an_lsm_tree
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.lsm.application_work_units_currently_queued
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.lsm.merge_work_units_currently_queued
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.lsm.tree_queue_hit_maximum
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.lsm.switch_work_units_currently_queued
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.lsm.tree_maintenance_operations_scheduled
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.lsm.tree_maintenance_operations_discarded
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.lsm.tree_maintenance_operations_executed
+
+type: integer
+
+
+[float]
+=== server_status.wired_tiger.async.number_of_allocation_state_races
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.async.number_of_operation_slots_viewed_for_allocation
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.async.current_work_queue_length
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.async.number_of_flush_calls
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.async.number_of_times_operation_allocation_failed
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.async.maximum_work_queue_length
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.async.number_of_times_worker_found_no_work
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.async.total_allocations
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.async.total_compact_calls
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.async.total_insert_calls
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.async.total_remove_calls
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.async.total_search_calls
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.async.total_update_calls
+
+type: integer
+
+
+[float]
+=== server_status.wired_tiger.block_manager.mapped_bytes_read
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.block_manager.bytes_read
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.block_manager.bytes_written
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.block_manager.mapped_blocked_read
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.block_manager.blocks_pre_loaded
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.block_manager.blocks_read
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.block_manager.blocks_written
+
+type: integer
+
+
+[float]
+=== server_status.wired_tiger.cache.tracked_dirty_bytes_in_the_cache
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cache.bytes_currently_in_the_cache
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cache.maximum_bytes_configured
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cache.bytes_read_into_cache
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cache.bytes_written_from_cache
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cache.pages_evicted_by_application_threads
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cache.checkpoint_blocked_page_eviction
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cache.unmodified_pages_evicted
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cache.page_split_during_eviction_deepened_the_tree
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cache.modified_pages_evicted
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cache.pages_selected_for_eviction_unable_to_be_evicted
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cache.pages_evicted_because_they_exceeded_the_in_memory_maximum
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cache.pages_evicted_because_they_had_chains_of_deleted_items
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cache.failed_eviction_of_pages_that_exceeded_the_in_memory_maximum
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cache.hazard_pointer_blocked_page_eviction
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cache.internal_pages_evicted
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cache.max_page_size_at_eviction
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cache.eviction_server_candidate_queue_empty_when_topping_up
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cache.eviction_server_candidate_queue_not_empty_when_topping_up
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cache.eviction_server_evicting_pages
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cache.eviction_server_populating_queue_but_not_evicting_pages
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cache.eviction_server_unable_to_reach_eviction_goal
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cache.pages_split_during_eviction
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cache.pages_walked_for_eviction
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cache.eviction_worker_thread_evicting_pages
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cache.in_memory_page_splits
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cache.percentage_overhead
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cache.tracked_dirty_pages_in_the_cache
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cache.pages_currently_held_in_the_cache
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cache.pages_read_into_cache
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cache.pages_written_from_cache
+
+type: integer
+
+
+[float]
+=== server_status.wired_tiger.connection.pthread_mutex_condition_wait_calls
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.connection.files_currently_open
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.connection.memory_allocations
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.connection.memory_frees
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.connection.memory_re_allocations
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.connection.total_read_IOs
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.connection.pthread_mutex_shared_lock_read_lock_calls
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.connection.pthread_mutex_shared_lock_write_lock_calls
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.connection.total_write_IOs
+
+type: integer
+
+
+[float]
+=== server_status.wired_tiger.cursor.cursor_create_calls
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cursor.cursor_insert_calls
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cursor.cursor_next_calls
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cursor.cursor_prev_calls
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cursor.cursor_remove_calls
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cursor.cursor_reset_calls
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cursor.cursor_search_calls
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cursor.cursor_search_near_calls
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.cursor.cursor_update_calls
+
+type: integer
+
+
+[float]
+=== server_status.wired_tiger.data_handle.connection_d_handles_swept
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.data_handle.connection_candidate_referenced
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.data_handle.connection_sweeps
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.data_handle.connection_time_of_death_sets
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.data_handle.session_d_handles_swept
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.data_handle.session_sweep_attempts
+
+type: integer
+
+
+[float]
+=== server_status.wired_tiger.log.log_buff_size_increases
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.log.total_log_buffer_size
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.log.load_bytes_of_payload_data
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.log.log_bytes_written
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.log.yields_waiting_for_previous_log_file_close
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.log.total_size_of_compressed_records
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.log.total_in_memory_size_of_compressed_records
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.log.log_records_too_small_to_compress
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.log.log_records_not_compressed
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.log.log_records_compressed
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.log.max_log_file_size
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.log.pre_allocated_log_files_prepared
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.log.number_of_pre_allocated_log_files_to_create
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.log.pre_allocated_log_files_used
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.log.log_read_operations
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.log.log_release_advances_write_lsn
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.log.records_processed_by_log_scan
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.log.log_scan_records_requiring_two_reads
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.log.log_scan_operations
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.log.consolidated slot closures
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.log.logging_bytes_consolidated
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.log.consolidated_slot_joins
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.log.consolidated_slot_joins_races
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.log.slots_selected_for_switching_that_were_unavailable
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.log.record_size_exceeded_maximum
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.log.failed_to_find_a_slot_large_enough_for_record
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.log.consolidated slot join transitions
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.log.log_sync_operations
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.log.log_sync_dir_operations
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.log.log_write_operations
+
+type: integer
+
+
+[float]
+=== server_status.wired_tiger.reconciliation.page_reconciliation_calls
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.reconciliation.page_reconciliation_calls_for_eviction
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.reconciliation.split_bytes_currently_awaiting_free
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.reconciliation.split_objects_currently_awaiting_free
+
+type: integer
+
+
+[float]
+=== server_status.wired_tiger.session.open_cursor_count
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.session.open_session_count
+
+type: integer
+
+
+[float]
+=== server_status.wired_tiger.thread_yield.page_acquire_busy_blocked
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.thread_yield.page_acquire_eviction_blocked
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.thread_yield.page_acquire_locked_blocked
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.thread_yield.page_acquire_read_blocked
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.thread_yield.page_acquire_time_sleeping
+
+type: integer
+
+
+[float]
+=== server_status.wired_tiger.transaction.transaction_begins
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.transaction.tansaction_checkpoints
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.transaction.transaction_checkpoint_currently_running
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.transaction.transaction_checkpoint_max_time_ms
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.transaction.transaction_checkpoint_min_time_ms
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.transaction.transaction_checkpoint_most_recent_time_ms
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.transaction.transaction_checkpoint_total_time_ms
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.transaction.transactions_committed
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.transaction.transaction_failures_due_to_cache_overflow
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.transaction.transaction_range_of_ids_currently_pinned
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.transaction.transactions_rolled_back
+
+type: integer
+
+
+
+[float]
+=== server_status.wired_tiger.concurrent_transactions.write.out
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.concurrent_transactions.write.available
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.concurrent_transactions.write.total_tickets
+
+type: integer
+
+
+[float]
+=== server_status.wired_tiger.concurrent_transactions.read.out
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.concurrent_transactions.read.available
+
+type: integer
+
+[float]
+=== server_status.wired_tiger.concurrent_transactions.read.total_tickets
+
+type: integer
 
