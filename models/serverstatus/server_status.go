@@ -4,8 +4,9 @@ import "time"
 
 // ServerStatus represents the comprehensive serverStatus output
 type ServerStatus struct {
-	Ok                    uint      `bson:"ok"                   json:"ok"`
-	Host                  string    `bson:"host"                 json:"host"`
+	Ok   uint   `bson:"ok"                   json:"ok"`
+	Host string `bson:"host"                 json:"host"`
+	// New in 3.2
 	AdvisoryHostFQDNs     []string  `bson:"advisoryHostFQDNs"    json:"advisory_host_fqdns"`
 	Version               string    `bson:"version"              json:"version"`
 	Process               string    `bson:"process"              json:"process"`

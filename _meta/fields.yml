@@ -607,7 +607,7 @@
             - name: rbid
               type: integer
 
-            - name: slaves
+            - name: replication_progress
               type: nested
               fields:
                 - name: rid
