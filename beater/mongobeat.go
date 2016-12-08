@@ -22,7 +22,7 @@ type Mongobeat struct {
 	done      chan struct{}
 	config    config.Config
 	client    publisher.Client
-	mongoConn mgo.Session
+	mongoConn *mgo.Session
 }
 
 // New creates a new Mongobeat Instance
@@ -32,12 +32,12 @@ func New(b *beat.Beat, cfg *common.Config) (beat.Beater, error) {
 		return nil, fmt.Errorf("Error reading config file: %v", err)
 	}
 
-	mongoConn := mongo.NewMongoConnection(config.MongoConnection)
+	mongoConn := mongo.NewMongoConnection(config.ConnectionInfo)
 
 	bt := &Mongobeat{
 		done:      make(chan struct{}),
 		config:    config,
-		mongoConn: *mongoConn,
+		mongoConn: mongoConn,
 	}
 
 	return bt, nil
