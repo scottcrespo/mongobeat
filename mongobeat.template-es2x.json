@@ -786,20 +786,7 @@
                 "rbid": {
                   "type": "long"
                 },
-                "secondary": {
-                  "type": "boolean"
-                },
-                "set_name": {
-                  "ignore_above": 1024,
-                  "index": "not_analyzed",
-                  "type": "string"
-                },
-                "set_version": {
-                  "ignore_above": 1024,
-                  "index": "not_analyzed",
-                  "type": "string"
-                },
-                "slaves": {
+                "replication_progress": {
                   "properties": {
                     "host": {
                       "ignore_above": 1024,
@@ -819,6 +806,19 @@
                     }
                   },
                   "type": "nested"
+                },
+                "secondary": {
+                  "type": "boolean"
+                },
+                "set_name": {
+                  "ignore_above": 1024,
+                  "index": "not_analyzed",
+                  "type": "string"
+                },
+                "set_version": {
+                  "ignore_above": 1024,
+                  "index": "not_analyzed",
+                  "type": "string"
                 }
               }
             },

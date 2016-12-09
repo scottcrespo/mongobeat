@@ -19,10 +19,10 @@ import (
 // Mongobeat implements the Beater interface and adds additional methods to pull data from
 // MongoDB's reporting utilities
 type Mongobeat struct {
-	done      chan struct{}
-	config    config.Config
-	client    publisher.Client
-	mongoConn mgo.Session
+	done       chan struct{}
+	config     config.Config
+	client     publisher.Client
+	masterConn *mgo.Session
 }
 
 // New creates a new Mongobeat Instance
@@ -32,12 +32,12 @@ func New(b *beat.Beat, cfg *common.Config) (beat.Beater, error) {
 		return nil, fmt.Errorf("Error reading config file: %v", err)
 	}
 
-	mongoConn := mongo.NewMongoConnection(config.MongoConnection)
+	masterConn := mongo.NewMasterConnection(config.ConnectionInfo)
 
 	bt := &Mongobeat{
-		done:      make(chan struct{}),
-		config:    config,
-		mongoConn: *mongoConn,
+		done:       make(chan struct{}),
+		config:     config,
+		masterConn: masterConn,
 	}
 
 	return bt, nil
@@ -50,22 +50,36 @@ func (bt *Mongobeat) Run(b *beat.Beat) error {
 
 	bt.client = b.Publisher.Connect()
 	ticker := time.NewTicker(bt.config.Period)
-	counter := 1
+	// urls is a list of urls of the services discovered in the cluster
+	urls := bt.masterConn.LiveServers()
+	// get a list of direct connections to each of the nodes in the cluster
+	nodes, err := mongo.NewNodeConnections(urls, bt.config.ConnectionInfo)
+	if err != nil {
+		return nil
+	}
 
+	// for each node, spawn another thread for each desired metrics
+	// Having a thread per node and per metric helps safeguard against a non-responsive server,
+	// or server call blocking other healthy reports
+	for _, node := range nodes {
+
+		if bt.config.DbStats {
+			go bt.monitorDbStats(b, node, ticker)
+		}
+
+		if bt.config.ServerStatus {
+			go bt.monitorServerStatus(b, node, ticker)
+		}
+	}
+
+	// block here until the done signal is received
 	for {
 
 		select {
 
 		case <-bt.done:
 			return nil
-
-		case <-ticker.C:
-
 		}
-
-		bt.getDbStats(b)
-		bt.getServerStatus(b)
-		counter++
 	}
 }
 

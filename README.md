@@ -12,51 +12,19 @@ This project is currently in an early development phase, and is not intended for
 | `db_stats` | `db.stats()` |
 | `server_status` | `db.serverStatus()` |
 
-### dbStats
+### db_stats
 
 Mongobeat iterates through the list of running databases on the instance and calls db.stats().
 
 The results are appended to the field `dbStats` as part of the Mongobeat event.
 
-Sample `dbStats` field:
-
-```
-...
-
-"dbStats": [
-{
-  "AvgObjSize": 0,
-  "Collections": 4,
-  "DataSize": 1168,
-  "Db": "admin",
-  "FileSize": 67108864,
-  "IndexSize": 24528,
-  "Indexes": 3,
-  "NumExtents": 4,
-  "Objects": 11,
-  "Ok": 1,
-  "StorageSize": 28672
-},
-{
-  "AvgObjSize": 0,
-  "Collections": 3,
-  "DataSize": 36560,
-  "Db": "local",
-  "FileSize": 67108864,
-  "IndexSize": 8176,
-  "Indexes": 1,
-  "NumExtents": 3,
-  "Objects": 34,
-  "Ok": 1,
-  "StorageSize": 10498048
-}
-],
-
-...
-```
-
 Ensure that this folder is at the following location:
 `${GOPATH}/github.com/scottcrespo`
+
+### server_status
+
+For each node in the cluster, mongobeat calls serverStatus() and ships the data to logstash
+
 
 ## Getting Started with Mongobeat
 
