@@ -1078,7 +1078,7 @@ type: keyword
 type: integer
 
 [float]
-=== server_status.repl.slaves
+=== server_status.repl.replication_progress
 
 type: nested
 

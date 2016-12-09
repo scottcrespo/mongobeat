@@ -763,18 +763,7 @@
                 "rbid": {
                   "type": "long"
                 },
-                "secondary": {
-                  "type": "boolean"
-                },
-                "set_name": {
-                  "ignore_above": 1024,
-                  "type": "keyword"
-                },
-                "set_version": {
-                  "ignore_above": 1024,
-                  "type": "keyword"
-                },
-                "slaves": {
+                "replication_progress": {
                   "properties": {
                     "host": {
                       "ignore_above": 1024,
@@ -792,6 +781,17 @@
                     }
                   },
                   "type": "nested"
+                },
+                "secondary": {
+                  "type": "boolean"
+                },
+                "set_name": {
+                  "ignore_above": 1024,
+                  "type": "keyword"
+                },
+                "set_version": {
+                  "ignore_above": 1024,
+                  "type": "keyword"
                 }
               }
             },
