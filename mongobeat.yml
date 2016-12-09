@@ -5,9 +5,12 @@
 mongobeat:
   # Defines how often an event is sent to the output
   period: 1s
-  
-  MongoConnection:
-    Addrs: ["localhost:27017"]
+  Name: "Mongobeat default local target 1"
+  DbStats : true
+  ServerStatus: true
+  ConnectionInfo :
+    Addrs :
+      - "localhost:27017"
 
 #================================ General =====================================
 

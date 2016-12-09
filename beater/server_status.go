@@ -1,41 +1,51 @@
 package beater
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/elastic/beats/libbeat/beat"
 	"github.com/elastic/beats/libbeat/common"
 	"github.com/elastic/beats/libbeat/logp"
 
+	"gopkg.in/mgo.v2"
+
 	status "github.com/scottcrespo/mongobeat/models/serverstatus"
 )
 
-// getDbStats calls db.stats() command and appends to a common.MapStr, with root key as
-// "dbStats"
-func (bt *Mongobeat) getServerStatus(b *beat.Beat) {
+func (bt *Mongobeat) monitorServerStatus(b *beat.Beat, node *mgo.Session, ticker *time.Ticker) {
 
-	// store common event info here
-	eventType := fmt.Sprintf("%s.server_status", b.Name)
+	eventType := "server_status"
 
-	db := bt.mongoConn.DB("admin")
+	db := node.DB("admin")
 
-	results := status.ServerStatus{}
+	for {
+		select {
 
-	err := db.Run("serverStatus", &results)
-	if err != nil {
-		logp.Err("Failed to retrieve server status")
-		return
+		case <-bt.done:
+			return
+
+		case <-ticker.C:
+
+		}
+
+		results := status.ServerStatus{}
+
+		err := db.Run("serverStatus", &results)
+		if err != nil {
+			logp.Err("Failed to retrieve server status")
+			return
+		}
+
+		// instantiate event
+		event := common.MapStr{
+			"@timestamp":    common.Time(time.Now()),
+			"type":          eventType,
+			"server_status": results,
+		}
+
+		// fire
+		bt.client.PublishEvent(event)
+		logp.Info("server_status Event sent")
+
 	}
-
-	// instantiate event
-	event := common.MapStr{
-		"@timestamp":    common.Time(time.Now()),
-		"type":          eventType,
-		"server_status": results,
-	}
-
-	// fire
-	bt.client.PublishEvent(event)
-	logp.Info("server_status Event sent")
 }
