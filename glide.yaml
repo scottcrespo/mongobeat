@@ -1,0 +1,11 @@
+package: github.com/scottcrespo/mongobeat
+import:
+- package: github.com/elastic/beats
+  subpackages:
+  - libbeat/beat
+  - libbeat/common
+  - libbeat/logp
+  - libbeat/publisher
+- package: gopkg.in/mgo.v2
+  subpackages:
+  - bson
