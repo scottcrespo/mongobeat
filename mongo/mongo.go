@@ -20,12 +20,13 @@ func NewMasterConnection(dialInfo *mgo.DialInfo) *mgo.Session {
 	return mongo
 }
 
-// NewNodeConnections estbalishes direct connections with a list of hosts
+// NewNodeConnections estbalishes direct connections with a list of hosts. It uses the supplied
+// dialInfo parameter as a template for establishing more direct connections
 func NewNodeConnections(urls []string, dialInfo *mgo.DialInfo) ([]*mgo.Session, error) {
 
-	nodes := make([]*mgo.Session, len(urls))
+	var nodes []*mgo.Session
 
-	for i, url := range urls {
+	for _, url := range urls {
 
 		// make a copy
 		nodeDialInfo := *dialInfo
@@ -36,12 +37,11 @@ func NewNodeConnections(urls []string, dialInfo *mgo.DialInfo) ([]*mgo.Session, 
 
 		session, err := mgo.DialWithInfo(&nodeDialInfo)
 		if err != nil {
-			logp.Err("Error establishing direct connection to mongo node at %s", url)
+			logp.Err("Error establishing direct connection to mongo node at %s. Error output: %s", url, err.Error())
 			// set i back a value so we don't skip an index when adding successful connections
-			i = i - 1
 			continue
 		}
-		nodes[i] = session
+		nodes = append(nodes, session)
 	}
 
 	if len(nodes) == 0 {
@@ -49,5 +49,6 @@ func NewNodeConnections(urls []string, dialInfo *mgo.DialInfo) ([]*mgo.Session, 
 		logp.Err(msg)
 		return []*mgo.Session{}, errors.New(msg)
 	}
+
 	return nodes, nil
 }
