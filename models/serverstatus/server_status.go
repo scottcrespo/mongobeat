@@ -4,31 +4,31 @@ import "time"
 
 // ServerStatus represents the comprehensive serverStatus output
 type ServerStatus struct {
-	Ok   uint   `bson:"ok"                   json:"ok"`
-	Host string `bson:"host"                 json:"host"`
+	Ok   uint   `bson:"ok,omitempty"                   json:"ok,omitempty"`
+	Host string `bson:"host,omitempty"                 json:"host,omitempty"`
 	// New in 3.2
-	AdvisoryHostFQDNs     []string  `bson:"advisoryHostFQDNs"    json:"advisory_host_fqdns"`
-	Version               string    `bson:"version"              json:"version"`
-	Process               string    `bson:"process"              json:"process"`
-	PID                   uint64    `bson:"pid"                  json:"pid"`
-	Uptime                uint      `bson:"uptime"               json:"uptime_sec"`
-	UptimeMillis          uint64    `bson:"uptimeMillis"         json:"uptime_ms"`
-	UptimeEstimate        uint      `bson:"uptimeEstimate"       json:"uptime_estimate"`
-	LocalTime             time.Time `bson:"localTime"            json:"local_time"`
-	Asserts               `bson:"asserts" json:"asserts"`
-	BackgroundFlushing    `bson:"backgroundFlushing" json:"backgroung_flushing"`
-	Connections           `bson:"connections" json:"connections"`
-	Dur                   `bson:"dur" json:"dur"`
-	ExtraInfo             `bson:"extra_info "json:"extra_info"`
-	GlobalLock            `bson:"globalLock" json:"global_lock"`
-	Locks                 `bson:"locks" json:"locks"`
-	Network               `bson:"network" json:"network"`
-	OpsCounters           `bson:"opscounters" json:"ops_counters"`
-	OpsCountersRepl       `bson:"opscountersRepl" json:"ops_counters_repl"`
-	Repl                  `bson:"repl" json:"repl"`
-	StorageEngine         `bson:"storageEngine" json:"storage_engine"`
-	WriteBacksBacksQueued bool `bson:"writeBacksQueued" json:"write_backs_queued"`
-	Mem                   `bson:"mem" json:"mem"`
-	Metrics               `bson:"metrics" json:"metrics"`
-	WiredTiger            `bson:"wiredTiger" json:"wired_tiger"`
+	AdvisoryHostFQDNs     []string  `bson:"advisoryHostFQDNs,omitempty"    json:"advisory_host_fqdns,omitempty"`
+	Version               string    `bson:"version,omitempty"              json:"version,omitempty"`
+	Process               string    `bson:"process,omitempty"              json:"process,omitempty"`
+	PID                   uint64    `bson:"pid,omitempty"                  json:"pid,omitempty"`
+	Uptime                uint      `bson:"uptime,omitempty"               json:"uptime_sec,omitempty"`
+	UptimeMillis          uint64    `bson:"uptimeMillis,omitempty"         json:"uptime_ms,omitempty"`
+	UptimeEstimate        uint      `bson:"uptimeEstimate,omitempty"       json:"uptime_estimate,omitempty"`
+	LocalTime             time.Time `bson:"localTime,omitempty"            json:"local_time,omitempty"`
+	Asserts               `bson:"asserts,omitempty" json:"asserts,omitempty"`
+	BackgroundFlushing    `bson:"backgroundFlushing,omitempty" json:"backgroung_flushing,omitempty"`
+	Connections           `bson:"connections,omitempty" json:"connections,omitempty"`
+	Dur                   `bson:"dur,omitempty" json:"dur,omitempty"`
+	ExtraInfo             `bson:"extra_info "json:"extra_info,omitempty"`
+	GlobalLock            `bson:"globalLock,omitempty" json:"global_lock,omitempty"`
+	Locks                 `bson:"locks,omitempty" json:"locks,omitempty"`
+	Network               `bson:"network,omitempty" json:"network,omitempty"`
+	OpsCounters           `bson:"opscounters,omitempty" json:"ops_counters,omitempty"`
+	OpsCountersRepl       `bson:"opscountersRepl,omitempty" json:"ops_counters_repl,omitempty"`
+	Repl                  `bson:"repl,omitempty" json:"repl,omitempty"`
+	StorageEngine         `bson:"storageEngine,omitempty" json:"storage_engine,omitempty"`
+	WriteBacksBacksQueued bool `bson:"writeBacksQueued,omitempty" json:"write_backs_queued,omitempty"`
+	Mem                   `bson:"mem,omitempty" json:"mem,omitempty"`
+	Metrics               `bson:"metrics,omitempty" json:"metrics,omitempty"`
+	WiredTiger            `bson:"wiredTiger,omitempty" json:"wired_tiger,omitempty"`
 }

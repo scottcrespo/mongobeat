@@ -2,26 +2,26 @@ package serverstatus
 
 // Locks is the 'locks' key of serverStatus output
 type Locks struct {
-	Global        LockType `bson:"Global" json:"global"`
-	MMAPV1Journal LockType `bson:"MMAPV1Journal" json:"mmap_v1_journal"`
-	Database      LockType `bson:"Database" json:"database"`
-	Collection    LockType `bson:"Collection" json:"collection"`
-	Metadata      LockType `bson:"Metadata" json:"metadata"`
-	Oplog         LockType `bson:"oplog" json:"oplog"`
+	Global        LockType `bson:"Global,omitempty" json:"global,omitempty"`
+	MMAPV1Journal LockType `bson:"MMAPV1Journal,omitempty" json:"mmap_v1_journal,omitempty"`
+	Database      LockType `bson:"Database,omitempty" json:"database,omitempty"`
+	Collection    LockType `bson:"Collection,omitempty" json:"collection,omitempty"`
+	Metadata      LockType `bson:"Metadata,omitempty" json:"metadata,omitempty"`
+	Oplog         LockType `bson:"oplog,omitempty" json:"oplog,omitempty"`
 }
 
 // LockType ..
 type LockType struct {
-	AcquireCount        LockMode `bson:"acquireCount" json:"acquire_count"`
-	AcquireWaitCount    LockMode `bson:"acquireWaitCount" json:"acquire_wait_count"`
-	TimeAcquiringMicros LockMode `bson:"timeAcquiringMicros" json:"time_acquiring_micros"`
-	DeadLockCount       LockMode `bson:"deadLockCount" json:"dead_lock_count"`
+	AcquireCount        LockMode `bson:"acquireCount,omitempty" json:"acquire_count,omitempty"`
+	AcquireWaitCount    LockMode `bson:"acquireWaitCount,omitempty" json:"acquire_wait_count,omitempty"`
+	TimeAcquiringMicros LockMode `bson:"timeAcquiringMicros,omitempty" json:"time_acquiring_micros,omitempty"`
+	DeadLockCount       LockMode `bson:"deadLockCount,omitempty" json:"dead_lock_count,omitempty"`
 }
 
 // LockMode ...
 type LockMode struct {
-	R  uint64 `bson:"r" json:"intent_shared_lock"`
-	RR uint64 `bson:"R" json:"shared_lock"`
-	W  uint64 `bson:"w" json:"intent_exclusive_lock"`
-	WW uint64 `bson:"W" json:"exclusive_lock"`
+	R  uint64 `bson:"r,omitempty" json:"intent_shared_lock,omitempty"`
+	RR uint64 `bson:"R,omitempty" json:"shared_lock,omitempty"`
+	W  uint64 `bson:"w,omitempty" json:"intent_exclusive_lock,omitempty"`
+	WW uint64 `bson:"W,omitempty" json:"exclusive_lock,omitempty"`
 }

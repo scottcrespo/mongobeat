@@ -13,16 +13,16 @@ import (
 type Config struct {
 	Period time.Duration `config:"period"`
 	// Name of your target
-	Name string `config:"Name"`
+	Name string `config:"name"`
 	// DbStats toggles whether to monintor db.stats()
-	DbStats bool `config:"DbStats"`
+	DbStats bool `config:"db_stats"`
 	// ServerStatus toggles whether to monitor db.serverStatus()
-	ServerStatus   bool `config:"ServerStatus"`
-	ConnectionInfo *mgo.DialInfo
-}
-
-// MongoTarget ...
-type MongoTarget struct {
+	ServerStatus bool `config:"server_status"`
+	// ConnectionInfo are the params used to connect to mongo instance
+	ConnectionInfo *mgo.DialInfo `config:"connection_info"`
+	// DiscoveryNodes specifies whether mongobeat should discovery and report on additional nodes
+	// in a cluster
+	DiscoverNodes bool `config:"discover_nodes"`
 }
 
 // DefaultConfig is the default configuration parameters used to run mongobeat
@@ -36,4 +36,5 @@ var DefaultConfig = Config{
 			"localhost:27017",
 		},
 	},
+	DiscoverNodes: false,
 }

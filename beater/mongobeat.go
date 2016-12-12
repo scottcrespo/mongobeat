@@ -49,9 +49,17 @@ func (bt *Mongobeat) Run(b *beat.Beat) error {
 	logp.Info("mongobeat is running! Hit CTRL-C to stop it.")
 
 	bt.client = b.Publisher.Connect()
+	// ticker is the period between reports
 	ticker := time.NewTicker(bt.config.Period)
-	// urls is a list of urls of the services discovered in the cluster
-	urls := bt.masterConn.LiveServers()
+	// urls is a list of instance urls we must directly connect to for reporting
+	var urls []string
+
+	if bt.config.DiscoverNodes == true {
+		urls = bt.masterConn.LiveServers()
+	} else {
+		urls = bt.config.ConnectionInfo.Addrs
+	}
+
 	// get a list of direct connections to each of the nodes in the cluster
 	nodes, err := mongo.NewNodeConnections(urls, bt.config.ConnectionInfo)
 	if err != nil {
