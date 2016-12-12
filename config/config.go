@@ -19,7 +19,7 @@ type Config struct {
 	// ServerStatus toggles whether to monitor db.serverStatus()
 	ServerStatus bool `config:"server_status"`
 	// ConnectionInfo are the params used to connect to mongo instance
-	ConnectionInfo *mgo.DialInfo
+	ConnectionInfo *mgo.DialInfo `config:"connection_info"`
 	// DiscoveryNodes specifies whether mongobeat should discovery and report on additional nodes
 	// in a cluster
 	DiscoverNodes bool `config:"discover_nodes"`
