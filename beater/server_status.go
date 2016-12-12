@@ -12,6 +12,7 @@ import (
 	status "github.com/scottcrespo/mongobeat/models/serverstatus"
 )
 
+// monitorServerStatus creates an event loop to monitor a particlar mongo node by calling serverStatus()
 func (bt *Mongobeat) monitorServerStatus(b *beat.Beat, node *mgo.Session, ticker *time.Ticker) {
 
 	eventType := "server_status"
